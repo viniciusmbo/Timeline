@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jesus Cristo — linha do tempo em oito olhares</title>
+<meta name="description" content="Infográfico interativo sobre Jesus Cristo: uma linha do tempo com zoom que revela os fatos por ordem de importância, comparando as leituras católica, ortodoxa, protestante, judaica, islâmica, histórica, espírita e apócrifa, ilustrada com obras de arte.">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>✝️</text></svg>">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Infográfico interativo</p>
+    <h1>Jesus Cristo<span class="thin"> — uma linha do tempo em oito olhares</span></h1>
+    <p class="lead">
+      A mesma vida, contada de oito maneiras. Dê <strong>zoom out</strong> para ver só o essencial;
+      vá dando <strong>zoom in</strong> e os fatos aparecem por ordem de importância, até o detalhe hora a hora
+      da última semana. Escolha as fontes que quer ouvir — cada uma tem sua cor — e clique em qualquer
+      acontecimento para ler o que cada tradição diz sobre ele, ilustrado por uma obra de arte.
+    </p>
+    <ul class="kpis" id="kpis"></ul>
+  </div>
+</header>
+
+<section class="controls" id="controls">
+  <div class="wrap">
+    <div class="controls-row">
+      <div class="fontes-bloco">
+        <div class="controls-label">
+          Fontes na linha do tempo
+          <button class="mini" id="btn-todas" type="button">todas</button>
+          <button class="mini" id="btn-nenhuma" type="button">nenhuma</button>
+        </div>
+        <div class="chips" id="chips-fontes"></div>
+      </div>
+      <div class="zoom-bloco">
+        <div class="controls-label">Zoom e detalhe</div>
+        <div class="zoom-controls">
+          <button class="btn" id="btn-menos" type="button" title="Afastar (tecla -)">−</button>
+          <button class="btn" id="btn-mais" type="button" title="Aproximar (tecla +)">+</button>
+          <button class="btn btn-txt" data-fit="vida" type="button">Vida de Jesus</button>
+          <button class="btn btn-txt" data-fit="semana" type="button">Semana Santa</button>
+          <button class="btn btn-txt" data-fit="tudo" type="button">Tudo</button>
+        </div>
+        <div class="nivel" id="nivel"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <section class="tl-bloco">
+    <div class="tl" id="tl" tabindex="0" aria-label="Linha do tempo interativa. Use as setas para navegar, mais e menos para o zoom.">
+      <div class="tl-track" id="tl-track">
+        <div class="tl-axis" id="tl-axis"></div>
+        <div class="tl-ticks" id="tl-ticks"></div>
+        <div class="tl-itens" id="tl-itens"></div>
+      </div>
+      <div class="tl-vazio" id="tl-vazio" hidden>Nenhuma fonte selecionada — escolha ao menos uma acima.</div>
+    </div>
+    <div class="mapa" id="mapa" aria-label="Visão geral do período">
+      <canvas id="mapa-canvas"></canvas>
+      <div class="mapa-janela" id="mapa-janela"></div>
+      <div class="mapa-legendas" id="mapa-legendas"></div>
+    </div>
+    <p class="dica">Arraste para navegar · roda do mouse ou pinça para dar zoom · clique num fato para abrir os detalhes · <kbd>←</kbd> <kbd>→</kbd> <kbd>+</kbd> <kbd>−</kbd> <kbd>Home</kbd></p>
+  </section>
+
+  <section class="secao" id="secao-divergencias">
+    <h2>Onde as fontes discordam</h2>
+    <p class="secao-lead">As mesmas perguntas, respondidas por cada tradição. A tabela acompanha as fontes selecionadas acima.</p>
+    <div class="tabela-wrap">
+      <table class="matriz" id="matriz"></table>
+    </div>
+  </section>
+
+  <section class="secao" id="secao-fontes">
+    <h2>As oito perspectivas</h2>
+    <p class="secao-lead">Quem fala, a partir de quê e desde quando.</p>
+    <div class="cards" id="cards-fontes"></div>
+  </section>
+
+  <section class="secao" id="secao-obras">
+    <h2>As obras que ilustram a linha do tempo</h2>
+    <p class="secao-lead">Todas em domínio público ou licença livre, servidas pelo Wikimedia Commons. Clique para abrir o fato correspondente.</p>
+    <div class="galeria" id="galeria"></div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <p><strong>Como este infográfico foi montado.</strong> As datas são aproximadas e assumidamente discutíveis: o nascimento é situado entre 6 e 4 a.C. e a crucificação em 7 de abril de 30 (a alternativa mais defendida é 3 de abril de 33). A posição na linha do tempo usa a datação majoritária; quando há divergência relevante, ela está descrita no próprio fato.</p>
+    <p>Cada perspectiva é apresentada em seus próprios termos, sem arbitrar quem tem razão. Textos escritos para este projeto a partir das fontes indicadas em cada evento; imagens do Wikimedia Commons, com autor, ano e licença informados em cada obra.</p>
+    <p class="creditos">Feito com HTML, CSS e JavaScript, sem dependências externas. <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+  </div>
+</footer>
+
+<aside class="painel" id="painel" hidden aria-live="polite">
+  <button class="painel-fechar" id="painel-fechar" type="button" aria-label="Fechar">✕</button>
+  <div class="painel-conteudo" id="painel-conteudo"></div>
+</aside>
+<div class="painel-fundo" id="painel-fundo" hidden></div>
+
+<script src="src/data/fontes.js"></script>
+<script src="src/data/obras.js"></script>
+<script src="src/data/eventos.js"></script>
+<script src="src/data/divergencias.js"></script>
+<script src="src/timeline.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
