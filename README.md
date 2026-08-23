@@ -25,6 +25,11 @@ que ganha detalhe conforme o zoom e compara oito perspectivas diferentes sobre o
   entre as obras do mesmo fato e link para o arquivo original.
 - **Tabela de divergências.** As mesmas oito perguntas (quem é Jesus, nasceu de virgem, morreu na
   cruz, ressuscitou…) respondidas por cada tradição, acompanhando as fontes selecionadas.
+- **Períodos.** Seis recortes prontos — Tudo, Vida de Jesus, Infância, Ministério, Semana Santa e
+  Igreja primitiva — mais um **período personalizado**, escolhido numa lista com todos os fatos
+  (de qual acontecimento até qual acontecimento). Qualquer período pode ser **travado**: com a
+  trava ligada, zoom, arrasto, teclado e minimapa não saem daquele trecho, e o que ficou de fora
+  aparece escurecido no minimapa.
 - **Minimapa** com escala comprimida, para navegar entre o contexto romano e o século XX sem perder
   a região da vida de Jesus.
 - **Nota sobre o calendário**, explicando por que a infância de Jesus aparece do lado “a.C.” da
@@ -53,7 +58,9 @@ Para publicar, qualquer hospedagem estática serve (GitHub Pages, Netlify, S3): 
 | --- | --- |
 | Zoom | roda do mouse, pinça, botões `+` / `−`, teclas `+` / `−`, duplo clique |
 | Navegar | arrastar, setas `←` `→`, clicar no minimapa |
-| Enquadrar | botões *Vida de Jesus*, *Semana Santa*, *Tudo*, tecla `Home` |
+| Enquadrar | botões *Tudo*, *Vida de Jesus*, *Infância*, *Ministério*, *Semana Santa*, *Igreja primitiva*, tecla `Home` |
+| Período personalizado | botão *Personalizado ▾*, escolher o fato inicial e o final, *aplicar* |
+| Travar o período | botão *travar* — prende a navegação ao trecho ativo até destravar |
 | Abrir um fato | clicar no cartão (ou no `+N` para aproximar o grupo) |
 | Trocar de obra | setas ‹ ›, pontinhos, arrastar de lado, ou `←` `→` com o painel aberto |
 | Ver em alta resolução | clicar na imagem; zoom com roda, pinça, duplo clique ou `+` `−`; `Esc` fecha |

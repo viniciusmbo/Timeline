@@ -111,19 +111,88 @@
   });
 
   var VISTAS = {
-    vida: [-12, 45],
-    semana: [30.236, 30.40],
-    tudo: [JC.Timeline.DOM_MIN, JC.Timeline.DOM_MAX]
+    tudo: { nome: "Tudo", a: JC.Timeline.DOM_MIN, b: JC.Timeline.DOM_MAX },
+    vida: { nome: "Vida de Jesus", a: -12, b: 45 },
+    infancia: { nome: "Infância", a: -7.2, b: 9 },
+    ministerio: { nome: "Ministério", a: 27.9, b: 30.35 },
+    semana: { nome: "Semana Santa", a: 30.236, b: 30.40 },
+    igreja: { nome: "Igreja primitiva", a: 30.2, b: 130 }
   };
-  Array.prototype.forEach.call(document.querySelectorAll("[data-fit]"), function (b) {
-    b.addEventListener("click", function () {
-      var v = VISTAS[b.dataset.fit];
-      tl.irPara(v[0], v[1]);
-      Array.prototype.forEach.call(document.querySelectorAll("[data-fit]"), function (o) {
-        o.setAttribute("aria-current", o === b ? "true" : "false");
-      });
+
+  var periodo = VISTAS.vida;   // periodo ativo (predefinido ou personalizado)
+  var travado = false;
+  var travaTimer = null;
+
+  function aplicarPeriodo(p, botao) {
+    periodo = p;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-fit]"), function (o) {
+      o.setAttribute("aria-current", o === botao ? "true" : "false");
     });
+    if (travaTimer) { clearTimeout(travaTimer); travaTimer = null; }
+    if (travado) tl.travar(null);           // libera para poder mover ate o novo trecho
+    tl.irPara(p.a, p.b);
+    if (travado) travaTimer = setTimeout(function () { tl.travar(p.a, p.b); travaTimer = null; }, 440);
+    mostrarPeriodo();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fit]"), function (b) {
+    b.addEventListener("click", function () { aplicarPeriodo(VISTAS[b.dataset.fit], b); });
   });
+
+  /* trava do periodo */
+  var btnTravar = $("btn-travar");
+  btnTravar.addEventListener("click", function () {
+    travado = !travado;
+    if (travado) {
+      // sem periodo escolhido, trava no trecho que esta na tela
+      if (!periodo.personalizado && periodo === VISTAS.tudo) periodo = { nome: "trecho atual", a: tl.t0, b: tl.t0 + tl.span };
+      tl.travar(periodo.a, periodo.b);
+    } else {
+      tl.travar(null);
+    }
+    btnTravar.setAttribute("aria-pressed", travado ? "true" : "false");
+    btnTravar.textContent = (travado ? "🔒" : "🔓") + " travar";
+    mostrarPeriodo();
+  });
+
+  /* periodo personalizado a partir da lista de fatos */
+  var ordenados = eventos.slice().sort(function (a, b) { return a.t - b.t; });
+  var opcoes = ordenados.map(function (e) {
+    return '<option value="' + e.id + '">' + esc(e.titulo) + " — " + esc(e.quando) + "</option>";
+  }).join("");
+  $("sel-ini").innerHTML = opcoes;
+  $("sel-fim").innerHTML = opcoes;
+  $("sel-ini").value = ordenados[0].id;
+  $("sel-fim").value = ordenados[ordenados.length - 1].id;
+
+  $("btn-custom").addEventListener("click", function () {
+    var cx = $("custom");
+    cx.hidden = !cx.hidden;
+    $("btn-custom").setAttribute("aria-expanded", cx.hidden ? "false" : "true");
+  });
+
+  $("btn-aplicar").addEventListener("click", function () {
+    var a = JC.eventosPorId[$("sel-ini").value], b = JC.eventosPorId[$("sel-fim").value];
+    if (!a || !b) return;
+    var ta = a.t, tb = b.t2 != null ? b.t2 : b.t, aviso = "";
+    if (tb < ta) { var tmp = ta; ta = tb; tb = tmp; aviso = "ordem invertida — ajustada. "; }
+    var folga = Math.max((tb - ta) * 0.06, 0.004);
+    aplicarPeriodo({
+      nome: a.titulo + " → " + b.titulo,
+      a: ta - folga, b: tb + folga, personalizado: true
+    }, null);
+    $("custom-msg").textContent = aviso + "período aplicado" + (travado ? " e travado" : "");
+  });
+
+  function mostrarPeriodo() {
+    var el = $("periodo");
+    if (!travado && periodo === VISTAS.tudo) { el.innerHTML = ""; return; }
+    el.innerHTML = (travado ? '<span class="cadeado">🔒 travado em</span> ' : '<span class="cadeado">período</span> ') +
+      "<b>" + esc(periodo.nome) + "</b>" +
+      (travado ? ' <button class="mini" id="destravar" type="button">destravar</button>' : "");
+    var d = $("destravar");
+    if (d) d.addEventListener("click", function () { btnTravar.click(); });
+  }
   $("btn-mais").addEventListener("click", function () { tl.zoom(0.55); });
   $("btn-menos").addEventListener("click", function () { tl.zoom(1 / 0.55); });
 
@@ -187,6 +256,18 @@
     });
     ctx.globalAlpha = 1;
 
+    if (v.limite) {                     // escurece o que esta fora do periodo travado
+      var la = mapaFrac(v.limite[0]) * r.width, lb = mapaFrac(v.limite[1]) * r.width;
+      ctx.fillStyle = "rgba(6,8,12,.62)";
+      ctx.fillRect(0, 0, la, r.height);
+      ctx.fillRect(lb, 0, r.width - lb, r.height);
+      ctx.strokeStyle = "rgba(217,168,63,.5)";
+      ctx.beginPath();
+      ctx.moveTo(la, 0); ctx.lineTo(la, r.height);
+      ctx.moveTo(lb, 0); ctx.lineTo(lb, r.height);
+      ctx.stroke();
+    }
+
     var a = mapaFrac(v.t0) * r.width, b = mapaFrac(v.t0 + v.span) * r.width;
     var jan = $("mapa-janela");
     jan.style.left = Math.max(0, a) + "px";
@@ -197,7 +278,7 @@
   function irMapa(e) {
     var r = canvas.parentNode.getBoundingClientRect();
     var t = mapaTempo((e.clientX - r.left) / r.width);
-    tl.irPara(t - tl.span / 2, t + tl.span / 2, false);
+    tl.irPara(t - tl.span / 2, t + tl.span / 2, false);   // o proprio motor respeita a trava
   }
   $("mapa").addEventListener("pointerdown", function (e) { mapaArrasta = true; irMapa(e); });
   window.addEventListener("pointermove", function (e) { if (mapaArrasta) irMapa(e); });
@@ -503,8 +584,7 @@
     if (!b) return;
     var ev = JC.eventosPorId[b.dataset.id];
     $("tl").scrollIntoView({ behavior: "smooth", block: "center" });
-    var largura = Math.max(tl.span, 1.2);
-    tl.irPara(ev.t - largura / 2, ev.t + largura / 2);
+    irAteEvento(ev, Math.max(tl.span, 1.2));
     tl.selecionado = ev.id;
     abrirPainel(ev, Number(b.dataset.i));
   });
@@ -514,11 +594,17 @@
     el.addEventListener("click", function () {
       var ev = JC.eventosPorId[el.dataset.ev];
       if (!ev) return;
-      tl.irPara(ev.t - 120, ev.t + 120);
+      irAteEvento(ev, 240);
       tl.selecionado = ev.id;
       abrirPainel(ev, 0);
     });
   });
+
+  // leva a vista ate um fato; se ele estiver fora do periodo travado, destrava antes
+  function irAteEvento(ev, largura) {
+    if (travado && (ev.t < periodo.a || ev.t > periodo.b)) btnTravar.click();
+    tl.irPara(ev.t - largura / 2, ev.t + largura / 2);
+  }
 
   /* ————— ligacao geral ————— */
   function atualizarTudo() {
@@ -529,6 +615,7 @@
 
   tl.medir();
   montarMatriz();
-  tl.irPara(VISTAS.vida[0], VISTAS.vida[1], false);
+  tl.irPara(VISTAS.vida.a, VISTAS.vida.b, false);
   document.querySelector('[data-fit="vida"]').setAttribute("aria-current", "true");
+  mostrarPeriodo();
 })();

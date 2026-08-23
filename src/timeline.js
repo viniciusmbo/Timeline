@@ -45,6 +45,7 @@ window.JC = window.JC || {};
 
     this.span = 60;
     this.t0 = -12;
+    this.limite = null;   // [a, b] quando o periodo esta travado
     this.largura = this.el.clientWidth || 1000;
 
     this._ligarEventos();
@@ -68,9 +69,22 @@ window.JC = window.JC || {};
   };
 
   Timeline.prototype._limitar = function () {
-    this.span = clamp(this.span, SPAN_MIN, SPAN_MAX);
-    var folga = this.span * 0.08;
-    this.t0 = clamp(this.t0, DOM_MIN - folga, DOM_MAX + folga - this.span);
+    var min = this.limite ? this.limite[0] : DOM_MIN;
+    var max = this.limite ? this.limite[1] : DOM_MAX;
+    this.span = clamp(this.span, SPAN_MIN, Math.max(SPAN_MIN, max - min));
+    var folga = this.limite ? 0 : this.span * 0.08;
+    this.t0 = clamp(this.t0, min - folga, max + folga - this.span);
+  };
+
+  // Trava a navegacao dentro de [a, b]; travar(null) libera de novo.
+  Timeline.prototype.travar = function (a, b) {
+    this.limite = a == null ? null : [a, b];
+    if (this.limite) {
+      this.span = Math.min(this.span, b - a);
+      this.t0 = clamp(this.t0, a, b - this.span);
+    }
+    this._limitar();
+    this.render();
   };
 
   Timeline.prototype.irPara = function (a, b, animar) {
@@ -323,7 +337,7 @@ window.JC = window.JC || {};
       });
     }
 
-    this.aoMudarVista({ t0: this.t0, span: this.span, nivel: this.nivel(), visiveis: itens.length });
+    this.aoMudarVista({ t0: this.t0, span: this.span, nivel: this.nivel(), visiveis: itens.length, limite: this.limite });
 
     function achaFaixa(faixas, esq) {
       for (var i = 0; i < maxFaixas; i++) {

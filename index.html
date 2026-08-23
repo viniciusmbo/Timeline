@@ -40,11 +40,28 @@
         <div class="zoom-controls">
           <button class="btn" id="btn-menos" type="button" title="Afastar (tecla -)">−</button>
           <button class="btn" id="btn-mais" type="button" title="Aproximar (tecla +)">+</button>
-          <button class="btn btn-txt" data-fit="vida" type="button">Vida de Jesus</button>
-          <button class="btn btn-txt" data-fit="semana" type="button">Semana Santa</button>
           <button class="btn btn-txt" data-fit="tudo" type="button">Tudo</button>
+          <button class="btn btn-txt" data-fit="vida" type="button">Vida de Jesus</button>
+          <button class="btn btn-txt" data-fit="infancia" type="button">Infância</button>
+          <button class="btn btn-txt" data-fit="ministerio" type="button">Ministério</button>
+          <button class="btn btn-txt" data-fit="semana" type="button">Semana Santa</button>
+          <button class="btn btn-txt" data-fit="igreja" type="button">Igreja primitiva</button>
+          <button class="btn btn-txt btn-trava" id="btn-travar" type="button" aria-pressed="false"
+                  title="Impede sair do período escolhido ao dar zoom ou arrastar">🔓 travar</button>
+          <button class="btn btn-txt" id="btn-custom" type="button" aria-expanded="false">Personalizado ▾</button>
+        </div>
+        <div class="custom" id="custom" hidden>
+          <label class="custom-campo">de
+            <select id="sel-ini"></select>
+          </label>
+          <label class="custom-campo">até
+            <select id="sel-fim"></select>
+          </label>
+          <button class="btn btn-txt" id="btn-aplicar" type="button">aplicar</button>
+          <span class="custom-msg" id="custom-msg"></span>
         </div>
         <div class="nivel" id="nivel"></div>
+        <div class="periodo" id="periodo"></div>
       </div>
     </div>
   </div>
@@ -65,7 +82,7 @@
       <div class="mapa-janela" id="mapa-janela"></div>
       <div class="mapa-legendas" id="mapa-legendas"></div>
     </div>
-    <p class="dica">Arraste para navegar · roda do mouse ou pinça para dar zoom · clique num fato para abrir os detalhes · <kbd>←</kbd> <kbd>→</kbd> <kbd>+</kbd> <kbd>−</kbd> <kbd>Home</kbd></p>
+    <p class="dica">Arraste para navegar · roda do mouse ou pinça para dar zoom · clique num fato para abrir os detalhes · trave um período para não sair dele sem querer · <kbd>←</kbd> <kbd>→</kbd> <kbd>+</kbd> <kbd>−</kbd> <kbd>Home</kbd></p>
     <aside class="nota">
       <b>Por que a infância de Jesus aparece do lado “a.C.” da régua?</b>
       Porque nosso calendário erra por alguns anos. Mateus situa o nascimento no reinado de Herodes, que morreu
