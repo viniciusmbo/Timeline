@@ -277,7 +277,6 @@ kbd {
 .p-titulo { font-size: 27px; margin: 6px 0 4px; }
 .p-quando { color: var(--texto-2); font-size: 13.5px; margin: 0 0 16px; }
 .p-obra { margin: 0 0 18px; border: 1px solid var(--linha); border-radius: var(--raio); overflow: hidden; background: var(--bg-3); }
-.p-obra img { display: block; width: 100%; height: auto; max-height: 52vh; object-fit: contain; background: #0c0f15; }
 .p-obra-fallback {
   padding: 34px 18px; text-align: center; color: var(--texto-3); font-size: 12.5px;
   background: repeating-linear-gradient(135deg, #151b26, #151b26 10px, #121821 10px, #121821 20px);
@@ -317,4 +316,109 @@ kbd {
   .hero { padding: 34px 0 22px; }
   .painel { width: 100%; }
   .kpis li { flex: 1 1 132px; }
+}
+
+/* ————— nota explicativa ————— */
+.nota {
+  margin: 14px 0 0; padding: 14px 18px; border: 1px solid var(--linha);
+  border-left: 3px solid var(--ouro); border-radius: var(--raio);
+  background: var(--bg-2); color: var(--texto-2); font-size: 13.5px; max-width: 100ch;
+}
+.nota b { color: var(--texto); display: block; margin-bottom: 4px; font-family: var(--serif); font-size: 15px; }
+.nota-link { color: var(--ouro); cursor: pointer; white-space: nowrap; }
+.nota-link:hover { text-decoration: underline; }
+
+/* ————— carrossel de obras ————— */
+.carrossel { position: relative; overflow: hidden; background: #0c0f15; }
+.car-palco { display: flex; transition: transform .35s cubic-bezier(.4, 0, .2, 1); }
+.car-slide {
+  flex: 0 0 100%; padding: 0; border: 0; background: none; cursor: zoom-in; position: relative;
+  display: block; touch-action: pan-y;
+}
+.car-slide img {
+  display: block; width: 100%; height: auto; max-height: 50vh; object-fit: contain; background: #0c0f15;
+}
+.car-lupa {
+  position: absolute; right: 10px; bottom: 10px; font-size: 11px; color: var(--texto);
+  background: rgba(8, 10, 15, .72); border: 1px solid var(--linha); border-radius: 20px;
+  padding: 4px 10px; opacity: 0; transition: opacity .15s;
+}
+.car-slide:hover .car-lupa, .car-slide:focus-visible .car-lupa { opacity: 1; }
+.car-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px;
+  border-radius: 50%; border: 1px solid var(--linha); background: rgba(8, 10, 15, .68);
+  color: var(--texto); font-size: 20px; line-height: 1; cursor: pointer; font-family: inherit;
+}
+.car-nav:hover { border-color: var(--ouro); color: var(--ouro); }
+.car-nav.ant { left: 8px; }
+.car-nav.prox { right: 8px; }
+.car-pontos { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+.car-ponto {
+  width: 7px; height: 7px; padding: 0; border-radius: 50%; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .35);
+}
+.car-ponto.on { background: var(--ouro); }
+.car-conta {
+  position: absolute; top: 8px; right: 10px; font-size: 11px; color: var(--texto);
+  background: rgba(8, 10, 15, .68); border-radius: 12px; padding: 2px 8px; letter-spacing: .04em;
+}
+
+/* ————— lupa (alta resolução) ————— */
+body.travado { overflow: hidden; }
+.lupa[hidden] { display: none; }
+.lupa {
+  position: fixed; inset: 0; z-index: 80; background: #06080c;
+  display: flex; flex-direction: column;
+}
+.lupa-barra {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 10px 14px; border-bottom: 1px solid var(--linha); background: var(--bg);
+}
+.lupa-titulo {
+  font-family: var(--serif); font-size: 15px; color: var(--texto);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lupa-acoes { display: flex; gap: 6px; align-items: center; flex: 0 0 auto; }
+.lupa-btn {
+  background: var(--bg-3); border: 1px solid var(--linha); color: var(--texto-2);
+  border-radius: 8px; height: 30px; padding: 0 10px; font-size: 12.5px; cursor: pointer;
+  font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; line-height: 1;
+}
+.lupa-btn:hover { color: var(--ouro); border-color: var(--ouro); }
+.lupa-x { font-size: 12px; }
+.lupa-palco {
+  flex: 1; position: relative; overflow: hidden; display: grid; place-items: center;
+  cursor: zoom-in; touch-action: none;
+}
+.lupa-palco.ampliado { cursor: grab; }
+#lupa-img {
+  max-width: 100%; max-height: 100%; transform-origin: center center;
+  transition: transform .12s ease-out; user-select: none; -webkit-user-drag: none;
+}
+.lupa-carregando {
+  position: absolute; font-size: 12.5px; color: var(--texto-3); letter-spacing: .04em;
+}
+.lupa-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px;
+  border-radius: 50%; border: 1px solid var(--linha); background: rgba(20, 26, 36, .8);
+  color: var(--texto); font-size: 24px; line-height: 1; cursor: pointer; z-index: 2; font-family: inherit;
+}
+.lupa-nav:hover { border-color: var(--ouro); color: var(--ouro); }
+.lupa-nav.ant { left: 14px; }
+.lupa-nav.prox { right: 14px; }
+.lupa-legenda {
+  margin: 0; padding: 11px 16px; border-top: 1px solid var(--linha); background: var(--bg);
+  font-size: 12.5px; color: var(--texto-2); display: flex; gap: 12px; align-items: baseline;
+}
+.lupa-legenda b { color: var(--texto); font-family: var(--serif); font-size: 14.5px; font-weight: 600; }
+.lupa-conta { margin-left: auto; color: var(--texto-3); font-size: 11.5px; white-space: nowrap; }
+
+@media (max-width: 720px) {
+  .lupa-titulo { display: none; }
+  .lupa-barra { justify-content: flex-end; }
+  .car-slide img { max-height: 42vh; }
+  .lupa-legenda { flex-wrap: wrap; gap: 4px 10px; }
+  .lupa-legenda b { flex: 1 0 100%; }
+  .lupa-conta { margin-left: 0; }
+  .lupa-nav { width: 36px; height: 36px; font-size: 20px; }
 }

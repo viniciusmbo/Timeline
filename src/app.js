@@ -1,9 +1,18 @@
-/* Montagem da pagina: filtros, painel de detalhes, minimapa, matriz e galeria. */
+/* Montagem da pagina: filtros, painel com carrossel de obras, lupa em alta resolucao,
+   minimapa, matriz comparativa e galeria. */
 (function () {
   "use strict";
 
   var JC = window.JC;
   var fontes = JC.fontes, fmap = JC.fontesPorId, eventos = JC.eventos, obras = JC.obras;
+
+  // O Wikimedia so entrega miniaturas em larguras padrao; pedir tamanhos fora desta lista
+  // faz o servidor responder 429 em vez da imagem.
+  var LARGURAS = [320, 640, 800, 1024, 1280, 2560];
+  function larguraPadrao(l) {
+    for (var i = 0; i < LARGURAS.length; i++) if (l <= LARGURAS[i]) return LARGURAS[i];
+    return LARGURAS[LARGURAS.length - 1];
+  }
 
   JC.urlObra = function (arquivo, largura) {
     // encodeURIComponent deixa passar ' ( ) ! * — que quebram atributos HTML e url() no CSS
@@ -11,8 +20,19 @@
       .replace(/%20/g, "_")
       .replace(/'/g, "%27").replace(/\(/g, "%28").replace(/\)/g, "%29")
       .replace(/!/g, "%21").replace(/\*/g, "%2A");
-    return "https://commons.wikimedia.org/wiki/Special:FilePath/" + nome + "?width=" + largura;
+    var base = "https://commons.wikimedia.org/wiki/Special:FilePath/" + nome;
+    return largura ? base + "?width=" + larguraPadrao(largura) : base;
   };
+
+  // se a miniatura grande falhar, tenta a menor antes de desistir
+  document.addEventListener("error", function (e) {
+    var img = e.target;
+    if (!img || img.tagName !== "IMG" || img.dataset.retentado) return;
+    var m = String(img.src).match(/^(.*Special:FilePath\/[^?]*)/);
+    if (!m) return;
+    img.dataset.retentado = "1";
+    img.src = m[1] + "?width=320";
+  }, true);
 
   var selecionadas = {};
   fontes.forEach(function (f) { selecionadas[f.id] = true; });
@@ -23,10 +43,12 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   };
+  function obrasDe(ev) {
+    return (ev.obras || []).map(function (k) { return obras[k]; }).filter(Boolean);
+  }
 
   /* ————— indicadores ————— */
   (function kpis() {
-    var comObra = eventos.filter(function (e) { return e.obra; }).length;
     var dados = [
       [eventos.length, "fatos catalogados"],
       [fontes.length, "perspectivas"],
@@ -37,7 +59,6 @@
     $("kpis").innerHTML = dados.map(function (d) {
       return "<li><b>" + d[0] + "</b><span>" + d[1] + "</span></li>";
     }).join("");
-    void comObra;
   })();
 
   /* ————— chips de fontes ————— */
@@ -82,7 +103,7 @@
     eventos: eventos,
     fontes: fmap,
     selecionadas: selecionadas,
-    aoSelecionar: abrirPainel,
+    aoSelecionar: function (ev) { abrirPainel(ev, 0); },
     aoMudarVista: function (v) {
       mostrarNivel(v.nivel, v.visiveis);
       desenharMapa(v);
@@ -182,18 +203,93 @@
   window.addEventListener("pointermove", function (e) { if (mapaArrasta) irMapa(e); });
   window.addEventListener("pointerup", function () { mapaArrasta = false; });
 
-  /* ————— painel ————— */
+  /* ————— painel com carrossel ————— */
   var painel = $("painel"), fundo = $("painel-fundo");
+  var atual = { ev: null, obras: [], i: 0 };
 
-  function imagemObra(obra, largura) {
-    return '<img src="' + JC.urlObra(obra.arquivo, largura) + '" alt="' + esc(obra.titulo) +
-      '" loading="lazy" onerror="this.outerHTML=\'<div class=&quot;p-obra-fallback&quot;>imagem indisponível offline<br>' +
-      esc(obra.titulo).replace(/'/g, "") + '</div>\'">';
+  var LICENCAS = {
+    "Public domain": "Domínio público",
+    "PD-US": "Domínio público (EUA)",
+    "CC0": "CC0 — domínio público"
+  };
+  function licenca(o) { return LICENCAS[o.licenca] || o.licenca; }
+
+  function fichaObra(o) {
+    return '<div class="t">' + esc(o.titulo) + "</div>" +
+      '<div class="meta">' + esc(o.autor) + " · " + esc(o.ano) +
+      (o.tecnica ? " · " + esc(o.tecnica) : "") +
+      (o.local ? "<br>" + esc(o.local) : "") + "</div>" +
+      '<div class="cur">' + esc(o.curiosidade) + "</div>" +
+      '<div class="lic">' + esc(licenca(o)) + ' · <a href="' + o.pagina +
+        '" target="_blank" rel="noopener">Wikimedia Commons</a></div>';
   }
 
-  function abrirPainel(ev) {
+  function montarCarrossel(lista) {
+    var slides = lista.map(function (o, i) {
+      return '<button class="car-slide" type="button" data-i="' + i + '" title="Abrir em alta resolução">' +
+        '<img src="' + JC.urlObra(o.arquivo, 1024) + '" alt="' + esc(o.titulo) + '" loading="lazy">' +
+        '<span class="car-lupa">⤢ alta resolução</span></button>';
+    }).join("");
+    var pontos = lista.length > 1
+      ? '<div class="car-pontos">' + lista.map(function (o, i) {
+          return '<button class="car-ponto' + (i === 0 ? " on" : "") + '" type="button" data-i="' + i +
+            '" aria-label="Obra ' + (i + 1) + '"></button>';
+        }).join("") + "</div>"
+      : "";
+    var setas = lista.length > 1
+      ? '<button class="car-nav ant" type="button" data-d="-1" aria-label="Anterior">‹</button>' +
+        '<button class="car-nav prox" type="button" data-d="1" aria-label="Próxima">›</button>' +
+        '<span class="car-conta"><b>1</b>/' + lista.length + "</span>"
+      : "";
+    return '<figure class="p-obra">' +
+      '<div class="carrossel" id="carrossel">' +
+        '<div class="car-palco" id="car-palco">' + slides + "</div>" + setas + pontos +
+      "</div>" +
+      '<figcaption class="p-obra-info" id="p-obra-info">' + fichaObra(lista[0]) + "</figcaption>" +
+    "</figure>";
+  }
+
+  function irSlide(i) {
+    var n = atual.obras.length;
+    if (!n) return;
+    atual.i = (i + n) % n;
+    var palco = $("car-palco");
+    if (palco) palco.style.transform = "translateX(" + (-atual.i * 100) + "%)";
+    var info = $("p-obra-info");
+    if (info) info.innerHTML = fichaObra(atual.obras[atual.i]);
+    Array.prototype.forEach.call(document.querySelectorAll(".car-ponto"), function (p, k) {
+      p.classList.toggle("on", k === atual.i);
+    });
+    var conta = document.querySelector(".car-conta b");
+    if (conta) conta.textContent = atual.i + 1;
+  }
+
+  function ligarCarrossel() {
+    var car = $("carrossel");
+    if (!car) return;
+    car.addEventListener("click", function (e) {
+      var nav = e.target.closest(".car-nav");
+      if (nav) { irSlide(atual.i + Number(nav.dataset.d)); return; }
+      var ponto = e.target.closest(".car-ponto");
+      if (ponto) { irSlide(Number(ponto.dataset.i)); return; }
+      var slide = e.target.closest(".car-slide");
+      if (slide) abrirLupa(Number(slide.dataset.i));
+    });
+    // arrastar/deslizar
+    var x0 = null;
+    car.addEventListener("pointerdown", function (e) { x0 = e.clientX; });
+    car.addEventListener("pointerup", function (e) {
+      if (x0 === null) return;
+      var dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 45) irSlide(atual.i + (dx < 0 ? 1 : -1));
+    });
+  }
+
+  function abrirPainel(ev, indice) {
     if (!ev) return;
-    var obra = ev.obra && obras[ev.obra];
+    var lista = obrasDe(ev);
+    atual = { ev: ev, obras: lista, i: 0 };
+
     var cats = {
       contexto: "Contexto", infancia: "Infância", ministerio: "Ministério",
       paixao: "Paixão", pascoa: "Páscoa", igreja: "Igreja e doutrina", fontes: "Fontes e testemunhos"
@@ -207,20 +303,11 @@
       (selecionadas[f.id] ? visoesSel : visoesOut).push(bloco);
     });
 
-    var html =
+    $("painel-conteudo").innerHTML =
       '<p class="p-cat">' + (cats[ev.cat] || ev.cat) + "</p>" +
       '<h2 class="p-titulo">' + esc(ev.titulo) + "</h2>" +
       '<p class="p-quando">' + esc(ev.quando) + "</p>" +
-      (obra ? '<figure class="p-obra">' + imagemObra(obra, 900) +
-        '<figcaption class="p-obra-info">' +
-          '<div class="t">' + esc(obra.titulo) + "</div>" +
-          '<div class="meta">' + esc(obra.autor) + " · " + esc(obra.ano) +
-          (obra.tecnica ? " · " + esc(obra.tecnica) : "") +
-          (obra.local ? "<br>" + esc(obra.local) : "") + "</div>" +
-          '<div class="cur">' + esc(obra.curiosidade) + "</div>" +
-          '<div class="lic">' + esc(obra.licenca) + ' · <a href="' + obra.pagina +
-            '" target="_blank" rel="noopener">Wikimedia Commons</a></div>' +
-        "</figcaption></figure>" : "") +
+      (lista.length ? montarCarrossel(lista) : "") +
       '<p class="p-resumo">' + esc(ev.resumo) + "</p>" +
       (ev.refs ? '<p class="p-refs">' + ev.refs.map(function (r) { return "<span>" + esc(r) + "</span>"; }).join("") + "</p>" : "") +
       '<p class="p-sub">Como cada fonte conta</p>' +
@@ -230,14 +317,12 @@
           '<div id="p-extra" hidden>' + visoesOut.join("") + "</div>"
         : "");
 
-    $("painel-conteudo").innerHTML = html;
     painel.hidden = false; fundo.hidden = false;
     painel.scrollTop = 0;
+    ligarCarrossel();
+    if (indice) irSlide(indice);
     var mais = $("p-mais");
-    if (mais) mais.addEventListener("click", function () {
-      $("p-extra").hidden = false;
-      mais.remove();
-    });
+    if (mais) mais.addEventListener("click", function () { $("p-extra").hidden = false; mais.remove(); });
   }
 
   function fecharPainel() {
@@ -246,7 +331,131 @@
   }
   $("painel-fechar").addEventListener("click", fecharPainel);
   fundo.addEventListener("click", fecharPainel);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !painel.hidden) fecharPainel(); });
+
+  /* ————— lupa: obra em alta resolucao ————— */
+  var lupa = $("lupa"), lupaImg = $("lupa-img"), palco = $("lupa-palco");
+  var zoom = { escala: 1, x: 0, y: 0, arrastando: false, px: 0, py: 0 };
+
+  function aplicarZoom() {
+    lupaImg.style.transform = "translate(" + zoom.x + "px," + zoom.y + "px) scale(" + zoom.escala + ")";
+    palco.classList.toggle("ampliado", zoom.escala > 1.02);
+  }
+  function ajustar() { zoom.escala = 1; zoom.x = 0; zoom.y = 0; aplicarZoom(); }
+
+  function abrirLupa(i) {
+    if (!atual.obras.length) return;
+    atual.i = i;
+    var o = atual.obras[i];
+    $("lupa-carregando").hidden = false;
+    lupaImg.src = JC.urlObra(o.arquivo, 2560);
+    lupaImg.alt = o.titulo;
+    $("lupa-titulo").textContent = o.titulo + " · " + o.autor;
+    $("lupa-commons").href = o.pagina;
+    $("lupa-legenda").innerHTML = "<b>" + esc(o.titulo) + "</b> — " + esc(o.autor) + ", " + esc(o.ano) +
+      (o.local ? " · " + esc(o.local) : "") +
+      '<span class="lupa-conta">' + (i + 1) + "/" + atual.obras.length + "</span>";
+    var mostraNav = atual.obras.length > 1;
+    $("lupa-ant").hidden = !mostraNav; $("lupa-prox").hidden = !mostraNav;
+    lupa.hidden = false;
+    document.body.classList.add("travado");
+    ajustar();
+  }
+  function fecharLupa() {
+    lupa.hidden = true;
+    document.body.classList.remove("travado");
+    lupaImg.removeAttribute("src");
+    if (!painel.hidden) irSlide(atual.i);
+  }
+
+  lupaImg.addEventListener("load", function () { $("lupa-carregando").hidden = true; });
+  lupaImg.addEventListener("error", function () { $("lupa-carregando").textContent = "não foi possível carregar a imagem"; });
+  $("lupa-fechar").addEventListener("click", fecharLupa);
+  $("lupa-ajustar").addEventListener("click", ajustar);
+  $("lupa-mais").addEventListener("click", function () { zoom.escala = Math.min(8, zoom.escala * 1.5); aplicarZoom(); });
+  $("lupa-menos").addEventListener("click", function () {
+    zoom.escala = Math.max(1, zoom.escala / 1.5);
+    if (zoom.escala === 1) { zoom.x = 0; zoom.y = 0; }
+    aplicarZoom();
+  });
+  $("lupa-ant").addEventListener("click", function () { abrirLupa((atual.i - 1 + atual.obras.length) % atual.obras.length); });
+  $("lupa-prox").addEventListener("click", function () { abrirLupa((atual.i + 1) % atual.obras.length); });
+
+  palco.addEventListener("wheel", function (e) {
+    e.preventDefault();
+    var r = palco.getBoundingClientRect();
+    var cx = e.clientX - r.left - r.width / 2, cy = e.clientY - r.top - r.height / 2;
+    var antes = zoom.escala;
+    zoom.escala = Math.max(1, Math.min(8, zoom.escala * Math.exp(-e.deltaY * 0.002)));
+    var k = zoom.escala / antes;
+    zoom.x = cx - (cx - zoom.x) * k;
+    zoom.y = cy - (cy - zoom.y) * k;
+    if (zoom.escala === 1) { zoom.x = 0; zoom.y = 0; }
+    aplicarZoom();
+  }, { passive: false });
+
+  palco.addEventListener("dblclick", function (e) {
+    if (zoom.escala > 1.02) return ajustar();
+    var r = palco.getBoundingClientRect();
+    var cx = e.clientX - r.left - r.width / 2, cy = e.clientY - r.top - r.height / 2;
+    zoom.escala = 2.6;
+    zoom.x = -cx * (zoom.escala - 1);
+    zoom.y = -cy * (zoom.escala - 1);
+    aplicarZoom();
+  });
+
+  var toques = {}, pinca = null;
+  function distancia() {
+    var p = Object.keys(toques).map(function (k) { return toques[k]; });
+    return Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1;
+  }
+  palco.addEventListener("pointerdown", function (e) {
+    toques[e.pointerId] = { x: e.clientX, y: e.clientY };
+    if (Object.keys(toques).length === 2) {
+      pinca = { d: distancia(), escala: zoom.escala };
+      zoom.arrastando = false;
+      return;
+    }
+    if (zoom.escala <= 1.02) return;
+    zoom.arrastando = true; zoom.px = e.clientX; zoom.py = e.clientY;
+    palco.setPointerCapture(e.pointerId);
+  });
+  palco.addEventListener("pointermove", function (e) {
+    if (toques[e.pointerId]) toques[e.pointerId] = { x: e.clientX, y: e.clientY };
+    if (pinca && Object.keys(toques).length === 2) {
+      zoom.escala = Math.max(1, Math.min(8, pinca.escala * (distancia() / pinca.d)));
+      if (zoom.escala === 1) { zoom.x = 0; zoom.y = 0; }
+      aplicarZoom();
+      return;
+    }
+    if (!zoom.arrastando) return;
+    zoom.x += e.clientX - zoom.px; zoom.y += e.clientY - zoom.py;
+    zoom.px = e.clientX; zoom.py = e.clientY;
+    aplicarZoom();
+  });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(function (t) {
+    palco.addEventListener(t, function (e) {
+      delete toques[e.pointerId];
+      if (Object.keys(toques).length < 2) pinca = null;
+      zoom.arrastando = false;
+    });
+  });
+  palco.addEventListener("click", function (e) { if (e.target === palco) fecharLupa(); });
+
+  document.addEventListener("keydown", function (e) {
+    if (!lupa.hidden) {
+      if (e.key === "Escape") fecharLupa();
+      else if (e.key === "ArrowRight" && atual.obras.length > 1) abrirLupa((atual.i + 1) % atual.obras.length);
+      else if (e.key === "ArrowLeft" && atual.obras.length > 1) abrirLupa((atual.i - 1 + atual.obras.length) % atual.obras.length);
+      else if (e.key === "+" || e.key === "=") { zoom.escala = Math.min(8, zoom.escala * 1.5); aplicarZoom(); }
+      else if (e.key === "-") { zoom.escala = Math.max(1, zoom.escala / 1.5); aplicarZoom(); }
+      return;
+    }
+    if (e.key === "Escape" && !painel.hidden) fecharPainel();
+    if (!painel.hidden && atual.obras.length > 1) {
+      if (e.key === "ArrowRight") irSlide(atual.i + 1);
+      if (e.key === "ArrowLeft") irSlide(atual.i - 1);
+    }
+  });
 
   /* ————— matriz de divergencias ————— */
   function montarMatriz() {
@@ -265,36 +474,50 @@
 
   /* ————— cards das fontes ————— */
   $("cards-fontes").innerHTML = fontes.map(function (f) {
-    var obra = obras[f.obra];
+    var o = obras[f.obra];
     return '<article class="card" style="--cor:' + f.cor + '">' +
-      (obra ? '<div class="card-img" style=\'background-image:url("' + JC.urlObra(obra.arquivo, 600) + '")\'></div>' : "") +
+      (o ? '<div class="card-img" style=\'background-image:url("' + JC.urlObra(o.arquivo, 640) + '")\'></div>' : "") +
       '<div class="card-corpo"><h3>' + esc(f.nome) + "</h3>" +
       '<p class="curta">' + esc(f.curta) + "</p>" +
       "<p>" + esc(f.resumo) + "</p>" +
       '<p class="textos">' + esc(f.textos) + "</p></div></article>";
   }).join("");
 
-  /* ————— galeria ————— */
-  var vistas = {};
-  var comObra = eventos.filter(function (e) {
-    if (!e.obra || !obras[e.obra] || vistas[e.obra]) return false;
-    vistas[e.obra] = 1; return true;
+  /* ————— galeria (uma entrada por obra) ————— */
+  var vistas = {}, itensGaleria = [];
+  eventos.forEach(function (e) {
+    (e.obras || []).forEach(function (k, i) {
+      if (!obras[k] || vistas[k]) return;
+      vistas[k] = 1;
+      itensGaleria.push({ obra: obras[k], evento: e.id, indice: i });
+    });
   });
-  $("galeria").innerHTML = comObra.map(function (e) {
-    var o = obras[e.obra];
-    return '<button type="button" data-id="' + e.id + '">' +
-      '<span class="g-img" style=\'background-image:url("' + JC.urlObra(o.arquivo, 400) + '")\'></span>' +
-      '<span class="g-txt"><span class="g-t">' + esc(o.titulo) + "</span>" +
-      '<span class="g-a">' + esc(o.autor) + " · " + esc(o.ano) + "</span></span></button>";
+  $("galeria").innerHTML = itensGaleria.map(function (g) {
+    return '<button type="button" data-id="' + g.evento + '" data-i="' + g.indice + '">' +
+      '<span class="g-img" style=\'background-image:url("' + JC.urlObra(g.obra.arquivo, 320) + '")\'></span>' +
+      '<span class="g-txt"><span class="g-t">' + esc(g.obra.titulo) + "</span>" +
+      '<span class="g-a">' + esc(g.obra.autor) + " · " + esc(g.obra.ano) + "</span></span></button>";
   }).join("");
   $("galeria").addEventListener("click", function (e) {
     var b = e.target.closest("button[data-id]");
     if (!b) return;
     var ev = JC.eventosPorId[b.dataset.id];
-    document.getElementById("tl").scrollIntoView({ behavior: "smooth", block: "center" });
+    $("tl").scrollIntoView({ behavior: "smooth", block: "center" });
     var largura = Math.max(tl.span, 1.2);
     tl.irPara(ev.t - largura / 2, ev.t + largura / 2);
-    tl.selecionar(ev.id);
+    tl.selecionado = ev.id;
+    abrirPainel(ev, Number(b.dataset.i));
+  });
+
+  /* ————— atalho da nota sobre o calendario ————— */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-ev]"), function (el) {
+    el.addEventListener("click", function () {
+      var ev = JC.eventosPorId[el.dataset.ev];
+      if (!ev) return;
+      tl.irPara(ev.t - 120, ev.t + 120);
+      tl.selecionado = ev.id;
+      abrirPainel(ev, 0);
+    });
   });
 
   /* ————— ligacao geral ————— */

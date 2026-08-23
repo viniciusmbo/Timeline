@@ -66,6 +66,14 @@
       <div class="mapa-legendas" id="mapa-legendas"></div>
     </div>
     <p class="dica">Arraste para navegar · roda do mouse ou pinça para dar zoom · clique num fato para abrir os detalhes · <kbd>←</kbd> <kbd>→</kbd> <kbd>+</kbd> <kbd>−</kbd> <kbd>Home</kbd></p>
+    <aside class="nota">
+      <b>Por que a infância de Jesus aparece do lado “a.C.” da régua?</b>
+      Porque nosso calendário erra por alguns anos. Mateus situa o nascimento no reinado de Herodes, que morreu
+      em 4 a.C.: por isso a datação usual é entre 6 e 4 a.C. — Jesus nasce, literalmente, “antes de Cristo”.
+      Tudo o que vem logo em seguida (pastores, apresentação no Templo, magos, fuga para o Egito) continua em a.C.
+      até Herodes morrer. Não existe ano zero: 1 a.C. é seguido direto por 1 d.C.
+      <span class="nota-link" data-ev="dionisio">ver o fato que explica o erro →</span>
+    </aside>
   </section>
 
   <section class="secao" id="secao-divergencias">
@@ -96,6 +104,26 @@
     <p class="creditos">Feito com HTML, CSS e JavaScript, sem dependências externas. <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a></p>
   </div>
 </footer>
+
+<div class="lupa" id="lupa" hidden role="dialog" aria-label="Obra em alta resolução">
+  <div class="lupa-barra">
+    <span class="lupa-titulo" id="lupa-titulo"></span>
+    <span class="lupa-acoes">
+      <button class="lupa-btn" id="lupa-menos" type="button" title="Reduzir">−</button>
+      <button class="lupa-btn" id="lupa-mais" type="button" title="Ampliar">+</button>
+      <button class="lupa-btn" id="lupa-ajustar" type="button">ajustar</button>
+      <a class="lupa-btn" id="lupa-commons" target="_blank" rel="noopener">original no Commons ↗</a>
+      <button class="lupa-btn lupa-x" id="lupa-fechar" type="button" aria-label="Fechar">✕</button>
+    </span>
+  </div>
+  <div class="lupa-palco" id="lupa-palco">
+    <img id="lupa-img" alt="">
+    <div class="lupa-carregando" id="lupa-carregando">carregando alta resolução…</div>
+  </div>
+  <button class="lupa-nav ant" id="lupa-ant" type="button" aria-label="Obra anterior">‹</button>
+  <button class="lupa-nav prox" id="lupa-prox" type="button" aria-label="Próxima obra">›</button>
+  <p class="lupa-legenda" id="lupa-legenda"></p>
+</div>
 
 <aside class="painel" id="painel" hidden aria-live="polite">
   <button class="painel-fechar" id="painel-fechar" type="button" aria-label="Fechar">✕</button>

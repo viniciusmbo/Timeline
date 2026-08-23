@@ -66,7 +66,7 @@ window.JC.eventos = [
     titulo: "Pôncio Pilatos, prefeito da Judeia",
     quando: "26–36 d.C.",
     resumo: "Governa a província por dez anos, com sede em Cesareia. Josefo e Fílon o descrevem como duro e pouco diplomático; foi removido do cargo após uma repressão violenta na Samaria.",
-    obra: "pedra_pilatos",
+    obras: ["pedra_pilatos"],
     refs: ["Josefo, Antiguidades XVIII", "Fílon, Embaixada a Gaio", "Tácito, Anais XV,44"],
     visoes: {
       historica: "A Pedra de Pilatos, achada em Cesareia em 1961, é a única prova arqueológica direta de sua existência — e o chama de prefeito, não procurador.",
@@ -103,7 +103,7 @@ window.JC.eventos = [
     titulo: "A Anunciação a Maria",
     quando: "c. 6 a.C.",
     resumo: "O anjo Gabriel anuncia a uma jovem de Nazaré que ela conceberá um filho pelo poder do Espírito. O relato só aparece em Lucas; Mateus conta a mesma coisa do ponto de vista de José.",
-    obra: "anunciacao",
+    obras: ["anunciacao", "fra_angelico_anunciacao", "anunciacao_botticelli", "anunciacao_rossetti"],
     refs: ["Lc 1,26-38", "Mt 1,18-25"],
     visoes: {
       catolica: "Momento da Encarnação: o Verbo se faz carne no “sim” de Maria. A festa é celebrada em 25 de março, nove meses antes do Natal.",
@@ -121,7 +121,7 @@ window.JC.eventos = [
     titulo: "A Visitação e o Magnificat",
     quando: "c. 6 a.C.",
     resumo: "Maria vai à casa de Isabel, grávida de João Batista, e entoa o cântico que inverte a ordem do mundo: derruba os poderosos e eleva os humildes.",
-    obra: "visitacao",
+    obras: ["visitacao"],
     refs: ["Lc 1,39-56"],
     visoes: {
       catolica: "Festa em 31 de maio; o Magnificat é rezado todos os dias nas Vésperas.",
@@ -148,7 +148,7 @@ window.JC.eventos = [
     titulo: "Nascimento de Jesus em Belém",
     quando: "entre 6 e 4 a.C.",
     resumo: "Mateus e Lucas situam o nascimento em Belém, na Judeia, no fim do reinado de Herodes. O ano exato é desconhecido: a contagem que usamos vem de um erro de cálculo do monge Dionísio, o Exíguo, no século VI.",
-    obra: "natividade",
+    obras: ["natividade", "natividade_giotto", "natividade_latour", "gruta_belem"],
     refs: ["Lc 2,1-20", "Mt 1,18–2,12"],
     visoes: {
       catolica: "Encarnação do Filho de Deus. O Natal em 25 de dezembro foi fixado em Roma no século IV; a data é litúrgica, não histórica.",
@@ -166,7 +166,7 @@ window.JC.eventos = [
     titulo: "Isa nasce sob a tamareira",
     quando: "narrativa do Alcorão",
     resumo: "Na versão corânica, Maryam se retira para um lugar distante e dá à luz sozinha, agarrada ao tronco de uma tamareira que faz cair tâmaras maduras. O recém-nascido fala do berço para defender a mãe das acusações.",
-    obra: "isa_miniatura",
+    obras: ["isa_miniatura"],
     refs: ["Alcorão 19,16-34"],
     visoes: {
       islamica: "A sura Maryam é a única do Alcorão com nome de mulher. O bebê declara: “Sou servo de Deus; Ele me deu o Livro e fez de mim profeta” — a confissão que fecha qualquer leitura de divindade.",
@@ -178,7 +178,7 @@ window.JC.eventos = [
     titulo: "O anúncio aos pastores",
     quando: "c. 5 a.C.",
     resumo: "Em Lucas, os primeiros a saber são pastores — trabalhadores de reputação duvidosa, testemunhas legalmente pouco confiáveis na época.",
-    obra: "pastores",
+    obras: ["pastores"],
     refs: ["Lc 2,8-20"],
     visoes: {
       catolica: "O presépio, popularizado por Francisco de Assis em Greccio (1223), nasce dessa cena.",
@@ -192,7 +192,7 @@ window.JC.eventos = [
     titulo: "Apresentação no Templo",
     quando: "c. 5 a.C.",
     resumo: "Quarenta dias após o parto, José e Maria levam o menino ao Templo e oferecem duas rolas — a oferta prevista para quem não podia pagar um cordeiro. O velho Simeão o reconhece e prevê a espada que atravessará a mãe.",
-    obra: "apresentacao",
+    obras: ["apresentacao"],
     refs: ["Lc 2,22-38", "Lv 12,8"],
     visoes: {
       catolica: "Festa da Apresentação (2 de fevereiro), popularmente Candelária; a profecia de Simeão funda a devoção às Dores de Maria.",
@@ -206,7 +206,7 @@ window.JC.eventos = [
     titulo: "Os magos do Oriente",
     quando: "c. 5–4 a.C.",
     resumo: "Astrólogos vindos do Oriente seguem um astro até a criança e oferecem ouro, incenso e mirra. Mateus não diz quantos eram nem que fossem reis.",
-    obra: "magos",
+    obras: ["magos"],
     refs: ["Mt 2,1-12"],
     visoes: {
       catolica: "Epifania, 6 de janeiro: a manifestação de Cristo às nações. Os três nomes tradicionais aparecem só a partir do século VI.",
@@ -221,7 +221,7 @@ window.JC.eventos = [
     titulo: "A fuga para o Egito",
     quando: "c. 4 a.C.",
     resumo: "Avisado em sonho, José leva a família para o Egito e volta só depois da morte de Herodes, instalando-se em Nazaré.",
-    obra: "fuga_egito",
+    obras: ["fuga_egito"],
     refs: ["Mt 2,13-23", "Os 11,1"],
     visoes: {
       catolica: "Episódio muito presente na devoção à Sagrada Família e, hoje, em leituras sobre refugiados.",
@@ -235,7 +235,7 @@ window.JC.eventos = [
     titulo: "A matança dos inocentes",
     quando: "c. 4 a.C.",
     resumo: "Herodes manda matar os meninos de Belém com menos de dois anos. O episódio aparece apenas em Mateus.",
-    obra: "inocentes",
+    obras: ["inocentes"],
     refs: ["Mt 2,16-18", "Jr 31,15"],
     visoes: {
       catolica: "Os Santos Inocentes são celebrados em 28 de dezembro como os primeiros mártires.",
@@ -258,7 +258,7 @@ window.JC.eventos = [
     titulo: "Os anos ocultos em Nazaré",
     quando: "c. 4 a.C. – 28 d.C.",
     resumo: "Trinta anos sobre os quais os Evangelhos praticamente nada dizem. Jesus é chamado de tekton, artesão que trabalha madeira e pedra, e fala aramaico galileu.",
-    obra: "galileia",
+    obras: ["galileia"],
     refs: ["Mc 6,3", "Lc 2,51-52"],
     visoes: {
       historica: "A arqueologia mostra Nazaré como aldeia de 200 a 400 habitantes, a seis quilômetros de Séforis, cidade helenizada em obras — provável mercado de trabalho para artesãos da região.",
@@ -272,7 +272,7 @@ window.JC.eventos = [
     titulo: "Jesus aos doze anos no Templo",
     quando: "c. 7–8 d.C.",
     resumo: "Perdido pelos pais durante a peregrinação da Páscoa, é encontrado três dias depois discutindo com os mestres. É a única cena da adolescência em todo o Novo Testamento.",
-    obra: "doutores",
+    obras: ["doutores"],
     refs: ["Lc 2,41-52"],
     visoes: {
       catolica: "Quinto mistério gozoso do rosário; a resposta “nas coisas de meu Pai” é lida como primeira consciência filial.",
@@ -301,6 +301,7 @@ window.JC.eventos = [
     titulo: "João Batista prega no Jordão",
     quando: "c. 28 d.C.",
     resumo: "Um profeta de manto de pelos convoca Israel a um banho de conversão às margens do Jordão. Multidões descem da Judeia; o movimento incomoda Herodes Antipas.",
+    obras: ["joao_leonardo", "joao_bruegel"],
     refs: ["Mc 1,1-8", "Lc 3,1-18", "Josefo, Antiguidades XVIII,116-119"],
     visoes: {
       historica: "Josefo descreve João sem qualquer ligação com Jesus, o que reforça a existência independente do movimento batista — e alguns discípulos de João seguiram separados por décadas.",
@@ -315,7 +316,7 @@ window.JC.eventos = [
     titulo: "O batismo de Jesus no Jordão",
     quando: "c. 28–29 d.C.",
     resumo: "Jesus se põe na fila dos que buscam conversão e é batizado por João. Céu aberto, pomba, voz: começa a vida pública.",
-    obra: "batismo",
+    obras: ["batismo", "batismo_piero", "batismo_elgreco"],
     refs: ["Mc 1,9-11", "Mt 3,13-17", "Lc 3,21-22", "Jo 1,29-34"],
     visoes: {
       catolica: "Manifestação da Trindade e início do ministério; a festa fecha o tempo do Natal.",
@@ -331,7 +332,7 @@ window.JC.eventos = [
     titulo: "As tentações no deserto",
     quando: "c. 28–29 d.C.",
     resumo: "Quarenta dias de jejum e três propostas recusadas: pão, poder e espetáculo. Marcos resume em duas linhas; Mateus e Lucas desenvolvem o diálogo.",
-    obra: "tentacao",
+    obras: ["tentacao", "tentacao_botticelli", "tentacao_scheffer"],
     refs: ["Mt 4,1-11", "Lc 4,1-13", "Mc 1,12-13"],
     visoes: {
       catolica: "Fundamento da Quaresma; as três tentações são lidas como recusa a um messianismo de poder.",
@@ -346,7 +347,7 @@ window.JC.eventos = [
     titulo: "O chamado dos primeiros discípulos",
     quando: "c. 28–29 d.C.",
     resumo: "Pescadores do lago — Simão, André, Tiago e João — largam as redes. Depois virá um cobrador de impostos, figura socialmente detestada.",
-    obra: "chamado",
+    obras: ["chamado", "chamado_ghirlandaio"],
     refs: ["Mc 1,16-20", "Mt 9,9-13"],
     visoes: {
       catolica: "Vocação como iniciativa de Cristo, base da teologia do chamado.",
@@ -360,7 +361,7 @@ window.JC.eventos = [
     titulo: "Ministério na Galileia",
     quando: "c. 28–30 d.C.",
     resumo: "O núcleo da atividade pública: pregação do Reino em sinagogas e ao ar livre, curas, exorcismos e refeições com gente de má fama, tendo Cafarnaum como base.",
-    obra: "galileia",
+    obras: ["galileia"],
     refs: ["Mc 1–9", "Lc 4–9"],
     visoes: {
       catolica: "Anúncio do Reino que se realiza na Igreja e nos sacramentos.",
@@ -377,7 +378,7 @@ window.JC.eventos = [
     titulo: "As bodas de Caná",
     quando: "c. 29 d.C.",
     resumo: "Numa festa de casamento, a pedido da mãe, Jesus transforma água em vinho. João chama o episódio de “o primeiro dos sinais”.",
-    obra: "cana",
+    obras: ["cana", "cana_duccio"],
     refs: ["Jo 2,1-11"],
     visoes: {
       catolica: "Fundamento da intercessão de Maria: “fazei o que ele vos disser”. Também é leitura clássica sobre o matrimônio.",
@@ -418,7 +419,7 @@ window.JC.eventos = [
     titulo: "A samaritana no poço de Jacó",
     quando: "c. 29 d.C.",
     resumo: "Jesus pede água a uma mulher samaritana e trava com ela o diálogo mais longo que tem com alguém em todo o Evangelho de João — atravessando três barreiras: de gênero, de etnia e de reputação.",
-    obra: "samaritana",
+    obras: ["samaritana"],
     refs: ["Jo 4,1-42"],
     visoes: {
       catolica: "Leitura batismal clássica, usada na preparação dos catecúmenos na Quaresma.",
@@ -432,7 +433,7 @@ window.JC.eventos = [
     titulo: "O Sermão da Montanha",
     quando: "c. 29 d.C.",
     resumo: "Bem-aventuranças, Pai-Nosso, amor aos inimigos, a regra de ouro. Mateus reúne o essencial do ensino num só discurso; Lucas apresenta versão mais curta, numa planície.",
-    obra: "sermao",
+    obras: ["sermao"],
     refs: ["Mt 5–7", "Lc 6,20-49"],
     visoes: {
       catolica: "Magna carta da vida cristã, base da moral e da doutrina social.",
@@ -461,6 +462,7 @@ window.JC.eventos = [
     titulo: "Curas e exorcismos em Cafarnaum",
     quando: "c. 29 d.C.",
     resumo: "Paralíticos, leprosos, possessos, a sogra de Pedro. Marcos abre o evangelho com uma sequência de curas que atrai multidões e cria conflito com autoridades religiosas.",
+    obras: ["curas_rembrandt"],
     refs: ["Mc 1,21-45", "Mc 2,1-12"],
     visoes: {
       catolica: "Sinais do Reino e prefiguração dos sacramentos de cura.",
@@ -475,7 +477,7 @@ window.JC.eventos = [
     titulo: "A tempestade acalmada",
     quando: "c. 29 d.C.",
     resumo: "Uma borrasca súbita no lago — comum no Kinneret por causa dos ventos das colinas — surpreende os discípulos enquanto Jesus dorme na popa.",
-    obra: "tempestade",
+    obras: ["tempestade"],
     refs: ["Mc 4,35-41"],
     visoes: {
       catolica: "Imagem clássica da Igreja em meio à tempestade.",
@@ -502,7 +504,7 @@ window.JC.eventos = [
     titulo: "A execução de João Batista",
     quando: "c. 29 d.C.",
     resumo: "Preso por criticar o casamento de Herodes Antipas com Herodias, João é decapitado na fortaleza de Maquerus.",
-    obra: "joao_decapitado",
+    obras: ["joao_decapitado", "salome_caravaggio", "moreau_aparicao"],
     refs: ["Mc 6,14-29", "Josefo, Antiguidades XVIII,116-119"],
     visoes: {
       historica: "Josefo dá outro motivo: Antipas temia que a popularidade de João provocasse revolta. As duas explicações — moral e política — não se excluem.",
@@ -516,7 +518,7 @@ window.JC.eventos = [
     titulo: "A multiplicação dos pães",
     quando: "c. 29 d.C.",
     resumo: "O único milagre narrado pelos quatro Evangelhos — em Marcos e Mateus, duas vezes. Cinco pães, dois peixes, milhares de pessoas e sobras que enchem doze cestos.",
-    obra: "paes",
+    obras: ["paes"],
     refs: ["Mc 6,30-44", "Jo 6,1-15"],
     visoes: {
       catolica: "Prefiguração da Eucaristia: toma, abençoa, parte e distribui — os mesmos verbos da Última Ceia.",
@@ -531,7 +533,7 @@ window.JC.eventos = [
     titulo: "Caminhando sobre as águas",
     quando: "c. 29 d.C.",
     resumo: "De madrugada, Jesus caminha sobre o lago; em Mateus, Pedro tenta ir ao encontro e afunda.",
-    obra: "aguas",
+    obras: ["aguas"],
     refs: ["Mc 6,45-52", "Mt 14,22-33"],
     visoes: {
       catolica: "“Sou eu” ecoa o nome divino revelado a Moisés.",
@@ -545,7 +547,7 @@ window.JC.eventos = [
     titulo: "A confissão de Pedro em Cesareia de Filipe",
     quando: "c. 29–30 d.C.",
     resumo: "“Quem dizeis que eu sou?” Pedro responde: “Tu és o Cristo”. Em Mateus, Jesus acrescenta: “sobre esta pedra edificarei minha Igreja”.",
-    obra: "chaves",
+    obras: ["chaves"],
     refs: ["Mc 8,27-30", "Mt 16,13-20"],
     visoes: {
       catolica: "Fundamento bíblico do primado de Pedro e do papado: as chaves entregues a uma pessoa e a seus sucessores.",
@@ -559,7 +561,7 @@ window.JC.eventos = [
     titulo: "A Transfiguração",
     quando: "c. 29–30 d.C.",
     resumo: "Num monte alto — a tradição diz Tabor —, o rosto de Jesus brilha diante de Pedro, Tiago e João, com Moisés e Elias ao lado.",
-    obra: "transfiguracao",
+    obras: ["transfiguracao"],
     refs: ["Mc 9,2-8", "2Pd 1,16-18"],
     visoes: {
       catolica: "Antecipação da glória pascal; festa em 6 de agosto.",
@@ -574,7 +576,7 @@ window.JC.eventos = [
     titulo: "A parábola do bom samaritano",
     quando: "c. 30 d.C.",
     resumo: "Resposta à pergunta “quem é meu próximo?”. O herói é um samaritano — para o público original, justamente o herege.",
-    obra: "bom_samaritano",
+    obras: ["bom_samaritano"],
     refs: ["Lc 10,25-37"],
     visoes: {
       catolica: "Base da doutrina social e da caridade organizada.",
@@ -589,7 +591,7 @@ window.JC.eventos = [
     titulo: "A parábola do filho pródigo",
     quando: "c. 30 d.C.",
     resumo: "Um pai que corre para abraçar o filho que dilapidou a herança — e um irmão mais velho que não entende a festa.",
-    obra: "prodigo",
+    obras: ["prodigo"],
     refs: ["Lc 15,11-32"],
     visoes: {
       catolica: "Ícone da misericórdia e do sacramento da reconciliação.",
@@ -603,7 +605,7 @@ window.JC.eventos = [
     titulo: "A mulher surpreendida em adultério",
     quando: "c. 30 d.C.",
     resumo: "“Quem de vós estiver sem pecado atire a primeira pedra.” O episódio mais famoso de João... não estava em João.",
-    obra: "adultera",
+    obras: ["adultera"],
     refs: ["Jo 7,53–8,11"],
     visoes: {
       historica: "A perícope falta nos manuscritos gregos mais antigos e migra de lugar entre cópias — inclusive para dentro de Lucas. É provável tradição antiga e autêntica em espírito, inserida no texto depois.",
@@ -617,7 +619,7 @@ window.JC.eventos = [
     titulo: "As mulheres que seguiam Jesus",
     quando: "c. 29–30 d.C.",
     resumo: "Lucas cita Maria Madalena, Joana, mulher de um administrador de Herodes, e Susana, que sustentavam o grupo com seus bens. Elas estarão na cruz e no túmulo.",
-    obra: "madalena",
+    obras: ["madalena"],
     refs: ["Lc 8,1-3", "Mc 15,40-41"],
     visoes: {
       historica: "Um grupo itinerante com mulheres, algumas com recursos próprios, é socialmente incomum e por isso mesmo considerado dado antigo, não invenção posterior.",
@@ -632,7 +634,7 @@ window.JC.eventos = [
     titulo: "A ressurreição de Lázaro",
     quando: "c. 30 d.C.",
     resumo: "Em Betânia, Jesus chama para fora do túmulo um amigo morto há quatro dias. Em João, é o sinal que precipita a decisão de matá-lo.",
-    obra: "lazaro",
+    obras: ["lazaro", "lazaro_vangogh", "lazaro_giotto", "lazaro_rembrandt"],
     refs: ["Jo 11,1-53"],
     visoes: {
       catolica: "Antecipação da Ressurreição e promessa da vida eterna: “eu sou a ressurreição e a vida”.",
@@ -649,7 +651,7 @@ window.JC.eventos = [
     titulo: "Entrada em Jerusalém",
     quando: "domingo antes da Páscoa",
     resumo: "Jesus entra na cidade montado num jumento, aclamado com ramos. O gesto cita Zacarias 9,9: um rei que chega humilde, não em cavalo de guerra.",
-    obra: "ramos",
+    obras: ["ramos"],
     refs: ["Mc 11,1-11", "Zc 9,9"],
     visoes: {
       catolica: "Domingo de Ramos abre a Semana Santa; a procissão é rito universal.",
@@ -664,7 +666,7 @@ window.JC.eventos = [
     titulo: "A expulsão dos vendilhões do Templo",
     quando: "início da semana da Páscoa",
     resumo: "Jesus derruba as mesas dos cambistas e dos vendedores de animais no pátio do Templo — o gesto público mais agressivo que os Evangelhos lhe atribuem.",
-    obra: "templo_purificacao",
+    obras: ["templo_purificacao"],
     refs: ["Mc 11,15-19", "Jo 2,13-22"],
     visoes: {
       historica: "Para boa parte dos pesquisadores, este é o estopim: um ataque simbólico ao centro econômico e religioso, em plena Páscoa, sela sua sorte.",
@@ -678,7 +680,7 @@ window.JC.eventos = [
     titulo: "A Última Ceia",
     quando: "quinta-feira à noite",
     resumo: "Na véspera da morte, Jesus parte o pão e distribui o cálice com palavras que se tornariam o centro do culto cristão. Anuncia a traição e a negação.",
-    obra: "ceia",
+    obras: ["ceia", "ceia_tintoretto", "ceia_juanes", "ceia_bouts"],
     refs: ["Mc 14,12-25", "1Cor 11,23-26", "Jo 13"],
     visoes: {
       catolica: "Instituição da Eucaristia e do sacerdócio: pão e vinho tornam-se realmente corpo e sangue (transubstanciação).",
@@ -695,7 +697,7 @@ window.JC.eventos = [
     titulo: "O lava-pés",
     quando: "quinta-feira à noite",
     resumo: "Em João, no lugar da instituição da ceia, Jesus se ajoelha e lava os pés dos discípulos — tarefa de escravo.",
-    obra: "lava_pes",
+    obras: ["lava_pes"],
     refs: ["Jo 13,1-17"],
     visoes: {
       catolica: "Rito da Missa da Ceia do Senhor na Quinta-feira Santa; desde 2016 pode incluir mulheres explicitamente.",
@@ -710,7 +712,7 @@ window.JC.eventos = [
     titulo: "A agonia no Getsêmani",
     quando: "noite de quinta-feira",
     resumo: "No olival, Jesus pede que o cálice passe e sua angústia é descrita como suor de sangue por Lucas. Os discípulos dormem.",
-    obra: "getsemani",
+    obras: ["getsemani", "getsemani_elgreco", "getsemani_bellini"],
     refs: ["Mc 14,32-42", "Lc 22,44"],
     visoes: {
       catolica: "Prova suprema da humanidade de Cristo; primeiro mistério doloroso do rosário.",
@@ -725,7 +727,7 @@ window.JC.eventos = [
     titulo: "A prisão e o beijo de Judas",
     quando: "noite de quinta-feira",
     resumo: "Judas identifica Jesus com um beijo. Uma tropa o prende sem resistência organizada; um discípulo corta a orelha de um servo.",
-    obra: "prisao",
+    obras: ["prisao", "judas_giotto"],
     refs: ["Mc 14,43-52", "Jo 18,1-11"],
     visoes: {
       catolica: "A traição de Judas é lida como drama da liberdade humana diante da graça.",
@@ -740,7 +742,7 @@ window.JC.eventos = [
     titulo: "O julgamento diante das autoridades judaicas",
     quando: "madrugada de sexta-feira",
     resumo: "Levado à casa do sumo sacerdote, Jesus é interrogado sobre o Templo e sobre ser o Messias. A conclusão: blasfêmia — e entrega ao prefeito romano.",
-    obra: "pilatos",
+    obras: ["pilatos"],
     refs: ["Mc 14,53-65", "Jo 18,12-24"],
     visoes: {
       historica: "O procedimento descrito viola várias regras da Mishná para julgamentos capitais (à noite, na véspera de festa, sem intervalo). Provavelmente houve uma audiência informal de notáveis, não uma sessão plenária do Sinédrio.",
@@ -755,7 +757,7 @@ window.JC.eventos = [
     titulo: "A negação de Pedro",
     quando: "madrugada de sexta-feira",
     resumo: "No pátio, aquecido pelo fogo, o discípulo mais próximo nega três vezes conhecer Jesus. O galo canta.",
-    obra: "negacao",
+    obras: ["negacao"],
     refs: ["Mc 14,66-72"],
     visoes: {
       catolica: "Queda e restauração de Pedro fundamentam a teologia do perdão e da missão apesar da fraqueza.",
@@ -769,7 +771,7 @@ window.JC.eventos = [
     titulo: "O julgamento diante de Pilatos",
     quando: "manhã de sexta-feira",
     resumo: "Diante do prefeito, a acusação muda de tom: de blasfêmia para pretensão régia — “rei dos judeus”, ameaça política. Pilatos condena à cruz.",
-    obra: "pilatos",
+    obras: ["pilatos", "pilatos_munkacsy", "pilatos_ge"],
     refs: ["Mc 15,1-15", "Jo 18,28–19,16"],
     visoes: {
       historica: "A crucificação era pena romana para sedição, e o letreiro na cruz confirma a acusação política. O Pilatos hesitante dos Evangelhos contrasta com o administrador duro descrito por Fílon e Josefo — os textos cristãos tendem a aliviar Roma.",
@@ -784,7 +786,7 @@ window.JC.eventos = [
     titulo: "A flagelação",
     quando: "manhã de sexta-feira",
     resumo: "Antes da execução, o açoite romano com o flagrum — couro com pontas de metal ou osso — aplicado a um condenado amarrado a uma coluna baixa.",
-    obra: "flagelacao",
+    obras: ["flagelacao"],
     refs: ["Mc 15,15-20", "Jo 19,1-5"],
     visoes: {
       catolica: "Segundo e terceiro mistérios dolorosos; centro da devoção às Chagas.",
@@ -797,7 +799,7 @@ window.JC.eventos = [
     titulo: "A coroação de espinhos",
     quando: "manhã de sexta-feira",
     resumo: "A tropa monta uma paródia de realeza: manto de púrpura, cetro de caniço, coroa trançada de espinhos e saudações de escárnio ao “rei dos judeus”.",
-    obra: "coroacao",
+    obras: ["coroacao"],
     refs: ["Mc 15,16-20", "Jo 19,2-5"],
     visoes: {
       catolica: "Terceiro mistério doloroso; a coroa de espinhos venerada em Paris desde 1239 foi salva do incêndio de Notre-Dame em 2019.",
@@ -811,7 +813,7 @@ window.JC.eventos = [
     titulo: "O caminho até o Gólgota",
     quando: "sexta-feira, meio da manhã",
     resumo: "Jesus carrega o patíbulo até o local da execução, fora dos muros. Simão de Cirene é obrigado a ajudar.",
-    obra: "viacrucis",
+    obras: ["viacrucis", "viacrucis_ticiano"],
     refs: ["Mc 15,21-22", "Lc 23,26-32"],
     visoes: {
       catolica: "A Via Sacra, com catorze estações, foi difundida pelos franciscanos; Verônica e as quedas vêm da tradição, não do texto.",
@@ -824,7 +826,7 @@ window.JC.eventos = [
     titulo: "A crucificação",
     quando: "sexta-feira, 7 de abril de 30 (ou 3 de abril de 33)",
     resumo: "Jesus é crucificado no Gólgota entre dois condenados, sob um letreiro que declara o motivo da pena: “rei dos judeus”.",
-    obra: "crucificacao",
+    obras: ["crucificacao", "crucificacao_mantegna", "crucificacao_zurbaran"],
     refs: ["Mc 15,22-32", "Jo 19,17-27", "Tácito, Anais XV,44"],
     visoes: {
       catolica: "Sacrifício redentor que reconcilia a humanidade com Deus; centro da missa e da Sexta-feira Santa.",
@@ -842,7 +844,7 @@ window.JC.eventos = [
     titulo: "A morte e as últimas palavras",
     quando: "sexta-feira, à tarde",
     resumo: "Trevas, o grito “por que me abandonaste?” em Marcos, o “está consumado” em João. O véu do Templo se rasga; um centurião reconhece o filho de Deus.",
-    obra: "morte_cruz",
+    obras: ["morte_cruz", "cristo_morto_mantegna"],
     refs: ["Mc 15,33-41", "Lc 23,44-49", "Jo 19,28-30"],
     visoes: {
       catolica: "As sete palavras, reunidas dos quatro Evangelhos, estruturam a devoção da Sexta-feira Santa.",
@@ -857,7 +859,7 @@ window.JC.eventos = [
     titulo: "A descida da cruz",
     quando: "sexta-feira, fim da tarde",
     resumo: "José de Arimateia pede o corpo a Pilatos. Era véspera do sábado, e havia pressa para sepultar antes do pôr do sol.",
-    obra: "descida",
+    obras: ["descida"],
     refs: ["Mc 15,42-46", "Jo 19,38-40"],
     visoes: {
       catolica: "A Pietà — Maria com o corpo do filho no colo — é devoção medieval, não cena bíblica.",
@@ -870,7 +872,7 @@ window.JC.eventos = [
     titulo: "A Pietà: a dor da mãe",
     quando: "devoção posterior",
     resumo: "Nenhum Evangelho descreve Maria segurando o corpo do filho. A cena nasce na devoção alemã do século XIV e conquista a arte europeia.",
-    obra: "pieta",
+    obras: ["pieta"],
     refs: ["Jo 19,25-27"],
     visoes: {
       catolica: "Nossa Senhora das Dores; a Pietà de Michelangelo se tornou a imagem mais reproduzida do tema.",
@@ -883,7 +885,7 @@ window.JC.eventos = [
     titulo: "O sepultamento",
     quando: "sexta-feira, ao anoitecer",
     resumo: "O corpo é envolto em linho e colocado num túmulo escavado na rocha, fechado com uma pedra. Mulheres observam onde foi posto.",
-    obra: "sepultamento",
+    obras: ["sepultamento", "sepultamento_rafael"],
     refs: ["Mc 15,46-47", "Jo 19,41-42"],
     visoes: {
       catolica: "O Santo Sepulcro, em Jerusalém, é venerado desde o século IV como o local.",
@@ -897,7 +899,7 @@ window.JC.eventos = [
     titulo: "Sábado Santo: a descida ao Hades",
     quando: "sábado",
     resumo: "Entre a morte e a Ressurreição, a tradição cristã situa a descida de Cristo à morada dos mortos para libertar os justos de todas as eras.",
-    obra: "anastasis",
+    obras: ["anastasis"],
     refs: ["1Pd 3,18-20", "Credo dos Apóstolos"],
     visoes: {
       ortodoxa: "É a imagem oficial da Ressurreição no Oriente: Cristo pisa as portas quebradas do Hades e arranca Adão e Eva pelos pulsos.",
@@ -913,7 +915,7 @@ window.JC.eventos = [
     titulo: "A Ressurreição",
     quando: "domingo de manhã",
     resumo: "Mulheres encontram o túmulo aberto e vazio. Seguem-se relatos de aparições em Jerusalém e na Galileia — narrados de forma diferente por cada Evangelho.",
-    obra: "ressurreicao",
+    obras: ["ressurreicao", "ressurreicao_grunewald"],
     refs: ["Mc 16,1-8", "1Cor 15,3-8", "Jo 20"],
     visoes: {
       catolica: "Fundamento da fé: se Cristo não ressuscitou, vã é a fé (1Cor 15,14). Corpo real e glorificado.",
@@ -931,7 +933,7 @@ window.JC.eventos = [
     titulo: "Maria Madalena, primeira testemunha",
     quando: "domingo de manhã",
     resumo: "Em João, ela chora junto ao túmulo, confunde Jesus com o jardineiro e o reconhece quando ele a chama pelo nome. É enviada a anunciar aos outros.",
-    obra: "noli",
+    obras: ["noli", "noli_correggio"],
     refs: ["Jo 20,11-18"],
     visoes: {
       catolica: "Chamada “apóstola dos apóstolos” desde os Padres, título retomado oficialmente em 2016.",
@@ -945,7 +947,7 @@ window.JC.eventos = [
     titulo: "Os discípulos de Emaús",
     quando: "domingo à tarde",
     resumo: "Dois discípulos caminham conversando com um estranho e só o reconhecem quando ele parte o pão — e desaparece.",
-    obra: "emaus",
+    obras: ["emaus"],
     refs: ["Lc 24,13-35"],
     visoes: {
       catolica: "Estrutura da missa: Escritura explicada no caminho e pão partido à mesa.",
@@ -959,7 +961,7 @@ window.JC.eventos = [
     titulo: "A dúvida de Tomé",
     quando: "oito dias depois",
     resumo: "O discípulo que não estava presente exige ver e tocar. Quando Jesus reaparece e o convida a fazê-lo, ele responde: “Meu Senhor e meu Deus”.",
-    obra: "tome",
+    obras: ["tome", "tome_rembrandt"],
     refs: ["Jo 20,24-29"],
     visoes: {
       catolica: "A confissão de Tomé é o ponto alto cristológico do Evangelho de João.",
@@ -986,7 +988,7 @@ window.JC.eventos = [
     titulo: "A Ascensão",
     quando: "quarenta dias depois",
     resumo: "Segundo Lucas e Atos, Jesus é elevado ao céu diante dos discípulos, no monte das Oliveiras, quarenta dias após a Páscoa.",
-    obra: "ascensao",
+    obras: ["ascensao", "ascensao_giotto"],
     refs: ["At 1,6-11", "Lc 24,50-53"],
     visoes: {
       catolica: "Solenidade obrigatória, quarenta dias após a Páscoa; Cristo “sentado à direita do Pai”.",
@@ -1004,7 +1006,7 @@ window.JC.eventos = [
     titulo: "Pentecostes",
     quando: "cinquenta dias depois",
     resumo: "Na festa judaica de Shavuot, os discípulos reunidos relatam vento, fogo e a capacidade de serem entendidos por peregrinos de toda parte. É o início público do movimento.",
-    obra: "pentecostes",
+    obras: ["pentecostes", "pentecostes_ticiano", "pentecostes_restout"],
     refs: ["At 2"],
     visoes: {
       catolica: "Nascimento da Igreja e efusão do Espírito Santo sobre os apóstolos com Maria.",
@@ -1032,7 +1034,7 @@ window.JC.eventos = [
     titulo: "A conversão de Paulo",
     quando: "c. 34–36 d.C.",
     resumo: "A caminho de Damasco para perseguir cristãos, Saulo de Tarso tem uma experiência que descreve como aparição do ressuscitado. Torna-se o principal missionário do movimento.",
-    obra: "paulo",
+    obras: ["paulo", "paulo_bruegel", "paulo_michelangelo"],
     refs: ["At 9,1-19", "Gl 1,11-17", "1Cor 15,8"],
     visoes: {
       catolica: "Apóstolo dos gentios, cujas cartas fundamentam boa parte da teologia cristã.",
@@ -1073,7 +1075,7 @@ window.JC.eventos = [
     titulo: "Execução de Tiago, irmão de Jesus",
     quando: "62 d.C.",
     resumo: "Josefo relata que o sumo sacerdote Anano aproveitou um intervalo entre governadores romanos para mandar apedrejar “Tiago, irmão de Jesus chamado o Cristo”.",
-    obra: "josefo",
+    obras: ["josefo"],
     refs: ["Josefo, Antiguidades XX,200"],
     visoes: {
       historica: "Esta passagem é considerada autêntica por quase todos os especialistas e é uma das melhores provas externas da existência de Jesus.",
@@ -1097,7 +1099,7 @@ window.JC.eventos = [
     titulo: "A destruição do Templo de Jerusalém",
     quando: "agosto/setembro de 70 d.C.",
     resumo: "Após quatro anos de guerra, as legiões de Tito tomam Jerusalém, incendeiam o Templo e levam seus utensílios em triunfo para Roma.",
-    obra: "templo_destruido",
+    obras: ["templo_destruido", "arco_tito"],
     refs: ["Josefo, Guerra Judaica VI", "Mc 13"],
     visoes: {
       judaica: "Ruptura decisiva: sem Templo e sem sacrifícios, o judaísmo se reorganiza em torno da Torá, da sinagoga e do estudo — nasce o judaísmo rabínico, em Yavne. O Tishá BeAv ainda hoje marca o luto.",
@@ -1136,7 +1138,7 @@ window.JC.eventos = [
     titulo: "Josefo menciona Jesus",
     quando: "93–94 d.C.",
     resumo: "Nas “Antiguidades Judaicas”, o historiador judeu cita Jesus duas vezes. A passagem mais longa, o Testimonium Flavianum, chegou até nós com frases claramente cristãs.",
-    obra: "josefo",
+    obras: ["josefo"],
     refs: ["Josefo, Antiguidades XVIII,63-64 e XX,200"],
     visoes: {
       historica: "Consenso majoritário: havia um núcleo autêntico — Jesus, mestre, condenado por Pilatos, com seguidores — ampliado depois por copistas cristãos. Uma versão árabe do século X preserva forma mais sóbria.",
@@ -1196,7 +1198,7 @@ window.JC.eventos = [
     titulo: "O fragmento mais antigo do Novo Testamento",
     quando: "c. 125–175 d.C.",
     resumo: "O papiro P52, com poucas linhas de João 18, é o mais antigo pedaço identificado de um manuscrito neotestamentário conhecido.",
-    obra: "p52",
+    obras: ["p52"],
     refs: ["Papiro Rylands 457"],
     visoes: {
       historica: "Encontrado no Egito, mostra que o Evangelho de João já circulava longe de seu local de origem poucas décadas depois de escrito. A datação paleográfica, porém, tem margem de décadas.",
@@ -1208,6 +1210,7 @@ window.JC.eventos = [
     titulo: "O Evangelho de Tomé",
     quando: "compilação do séc. II",
     resumo: "Coleção de 114 ditos atribuídos a Jesus, sem narrativa, sem paixão e sem ressurreição. Foi encontrado completo em copta na biblioteca de Nag Hammadi, em 1945.",
+    obras: ["nag_hammadi"],
     refs: ["Nag Hammadi II,2"],
     visoes: {
       apocrifa: "Alguns ditos têm paralelo direto nos sinóticos; outros são claramente gnósticos, com ênfase no conhecimento secreto e na salvação como despertar interior.",
@@ -1221,7 +1224,7 @@ window.JC.eventos = [
     titulo: "O Protoevangelho de Tiago",
     quando: "c. 150 d.C.",
     resumo: "Narra a infância de Maria, o noivado com José viúvo, a gruta de Belém e a parteira incrédula. Sem existir no cânone, moldou festas, dogmas e imagens.",
-    obra: "gruta_belem",
+    obras: ["gruta_belem"],
     refs: ["Protoevangelho de Tiago"],
     visoes: {
       apocrifa: "Daqui vêm os nomes Joaquim e Ana, a apresentação de Maria no Templo e a gruta que a arte oriental adotou.",
@@ -1248,7 +1251,7 @@ window.JC.eventos = [
     titulo: "O grafite de Alexamenos",
     quando: "c. 200 d.C.",
     resumo: "Riscado numa parede do Palatino, em Roma, mostra um crucificado com cabeça de asno e um homem em adoração, sob a legenda “Alexamenos adora seu deus”.",
-    obra: "alexamenos",
+    obras: ["alexamenos"],
     refs: ["Museu Palatino, Roma"],
     visoes: {
       historica: "É a representação mais antiga conhecida da crucificação — feita por um adversário. Mostra como o culto a um crucificado soava absurdo à mentalidade romana.",
@@ -1272,7 +1275,7 @@ window.JC.eventos = [
     titulo: "As primeiras imagens de Cristo",
     quando: "séc. II–III",
     resumo: "Nas catacumbas romanas e em Dura-Europos, Jesus aparece como jovem imberbe, pastor com a ovelha aos ombros ou taumaturgo com uma varinha. Nada de cruz, nada de barba.",
-    obra: "bom_pastor",
+    obras: ["bom_pastor"],
     refs: ["Catacumbas de Priscila e de Calisto", "Dura-Europos"],
     visoes: {
       historica: "A iconografia começa emprestando modelos pagãos; o Cristo barbado e frontal só se firma a partir do século IV, com o modelo imperial.",
@@ -1286,7 +1289,7 @@ window.JC.eventos = [
     titulo: "O Concílio de Niceia",
     quando: "325 d.C.",
     resumo: "Convocado por Constantino para resolver a disputa com Ário, que via o Filho como criatura. O concílio define o Filho como “consubstancial ao Pai” e formula o núcleo do Credo.",
-    obra: "niceia",
+    obras: ["niceia"],
     refs: ["Credo niceno"],
     visoes: {
       catolica: "Definição dogmática irreversível da divindade de Cristo.",
@@ -1301,7 +1304,7 @@ window.JC.eventos = [
     titulo: "O Natal em 25 de dezembro",
     quando: "336 d.C. (primeiro registro em Roma)",
     resumo: "A data aparece pela primeira vez num calendário romano de 336. Antes disso, várias comunidades celebravam o nascimento em 6 de janeiro.",
-    obra: "pastores",
+    obras: ["pastores", "sol_invictus"],
     refs: ["Cronógrafo de 354"],
     visoes: {
       historica: "Duas explicações concorrem: a substituição da festa solar do Sol Invicto e o cálculo simbólico que fixava a concepção em 25 de março, data tradicional da Paixão.",
@@ -1328,7 +1331,7 @@ window.JC.eventos = [
     titulo: "O rosto que se tornou padrão",
     quando: "séc. VI",
     resumo: "O ícone do Pantocrator do Sinai fixa o rosto barbado, de olhos assimétricos, que se tornaria a imagem mais reconhecível de Cristo no mundo inteiro.",
-    obra: "pantocrator",
+    obras: ["pantocrator", "deesis"],
     refs: ["Mosteiro de Santa Catarina, Sinai"],
     visoes: {
       ortodoxa: "O ícone não é ilustração: é presença e teologia em cores, defendida no VII Concílio contra os iconoclastas.",
@@ -1341,7 +1344,7 @@ window.JC.eventos = [
     titulo: "O Alcorão e Isa ibn Maryam",
     quando: "610–632 d.C.",
     resumo: "Jesus aparece em quinze suras, sempre como profeta, Messias, servo e palavra de Deus — nascido de virgem, curador de cegos e leprosos, elevado ao céu, e que voltará.",
-    obra: "isa_miniatura",
+    obras: ["isa_miniatura"],
     refs: ["Alcorão 3, 4, 5, 19, 43"],
     visoes: {
       islamica: "Isa é um dos cinco maiores profetas. Negar sua profecia é descrença; afirmar sua divindade é o pecado maior. Ele voltará antes do Dia do Juízo e desmentirá o que fizeram de sua mensagem.",
@@ -1351,11 +1354,25 @@ window.JC.eventos = [
     }
   },
   {
+    id: "dionisio", t: 525, imp: 4, cat: "fontes",
+    titulo: "O erro que criou o “antes de Cristo”",
+    quando: "525 d.C.",
+    resumo: "O monge Dionísio, o Exíguo, calcula em Roma o ano do nascimento de Jesus para montar tabelas de Páscoa — e erra por alguns anos. Como Herodes morreu em 4 a.C., o nascimento acaba caindo antes do próprio “ano 1”.",
+    obras: ["gruta_belem"],
+    refs: ["Dionísio, o Exíguo, Argumenta paschalia (525)", "Josefo, Antiguidades XVII"],
+    visoes: {
+      historica: "A contagem a partir da Encarnação só se generaliza no século VIII, com Beda. Dionísio não tinha como acertar: faltavam-lhe as datas de Herodes e dos imperadores que hoje conhecemos. Some-se a isso o fato de não haver ano zero — 1 a.C. é seguido direto por 1 d.C. — e o resultado é que Jesus nasce entre 6 e 4 a.C.",
+      catolica: "A Igreja adotou a era cristã sem nunca tratá-la como datação histórica exata; o Natal é data litúrgica.",
+      judaica: "O calendário judaico conta desde a criação do mundo segundo a tradição (ano 3761 a.C.), e não tem relação com essa contagem.",
+      islamica: "O calendário islâmico conta a partir da Hégira (622 d.C.), em anos lunares."
+    }
+  },
+  {
     id: "niceia2", t: 787, imp: 4, cat: "igreja",
     titulo: "O Segundo Concílio de Niceia e os ícones",
     quando: "787 d.C.",
     resumo: "Depois de meio século de destruição de imagens, o concílio decide que representar Cristo é consequência da Encarnação: quem tem corpo pode ser pintado.",
-    obra: "pantocrator",
+    obras: ["pantocrator"],
     refs: ["Atas do II Concílio de Niceia"],
     visoes: {
       ortodoxa: "Vitória celebrada até hoje como Triunfo da Ortodoxia, no primeiro domingo da Quaresma. Venera-se o ícone, adora-se apenas a Deus.",
@@ -1381,7 +1398,7 @@ window.JC.eventos = [
     titulo: "Francisco de Assis inventa o presépio",
     quando: "Natal de 1223",
     resumo: "Em Greccio, na Itália, Francisco monta uma manjedoura com feno, um boi e um jumento para que as pessoas vissem com os olhos a pobreza do nascimento.",
-    obra: "pastores",
+    obras: ["greccio_giotto"],
     refs: ["Tomás de Celano, Vida Primeira"],
     visoes: {
       catolica: "Daí nasce a tradição do presépio, hoje presente em milhões de casas.",
@@ -1406,7 +1423,7 @@ window.JC.eventos = [
     titulo: "A luz do Tabor e o hesicasmo",
     quando: "1341–1351",
     resumo: "Concílios em Constantinopla confirmam a doutrina de Gregório Palamas: a luz vista na Transfiguração era energia incriada de Deus, acessível na oração, e não um símbolo criado.",
-    obra: "tabor_icone",
+    obras: ["tabor_icone"],
     refs: ["Gregório Palamas, Tríades"],
     visoes: {
       ortodoxa: "Coração da espiritualidade oriental: Deus é inacessível em sua essência e verdadeiramente comunicável em suas energias — daí a possibilidade real de divinização.",
@@ -1419,7 +1436,7 @@ window.JC.eventos = [
     titulo: "O Sudário de Turim",
     quando: "primeira exposição documentada: 1354",
     resumo: "Um lençol de linho de 4,4 metros com a imagem tênue de um homem torturado e crucificado. Objeto de devoção intensa e de disputa científica desde então.",
-    obra: "sudario",
+    obras: ["sudario"],
     refs: ["Catedral de Turim"],
     visoes: {
       catolica: "A Igreja nunca se pronunciou sobre a autenticidade e o trata como ícone e objeto de devoção, não como relíquia comprovada.",
@@ -1432,7 +1449,7 @@ window.JC.eventos = [
     titulo: "A Reforma e o retorno ao texto",
     quando: "a partir de 1517",
     resumo: "Lutero, Calvino e outros deslocam a autoridade da tradição para a Escritura, traduzem a Bíblia para línguas vernáculas e mudam para sempre a forma de ler os Evangelhos no Ocidente.",
-    obra: "sermao",
+    obras: ["lutero_cranach"],
     refs: ["95 teses", "Bíblia de Lutero (1534)"],
     visoes: {
       protestante: "Sola scriptura, sola fide, sola gratia: o acesso direto ao texto define a identidade das igrejas reformadas.",
@@ -1445,7 +1462,7 @@ window.JC.eventos = [
     titulo: "A leitura espírita de Jesus",
     quando: "1857–1868",
     resumo: "Allan Kardec organiza em Paris as obras básicas do Espiritismo. Em “O Evangelho segundo o Espiritismo” (1864), apresenta Jesus como modelo moral e guia espiritual da humanidade.",
-    obra: "kardec",
+    obras: ["kardec"],
     refs: ["O Livro dos Espíritos (1857)", "O Evangelho segundo o Espiritismo (1864)"],
     visoes: {
       espirita: "Jesus é o Espírito mais puro que passou pela Terra e seu governador espiritual — não Deus, nem parte de uma trindade. Os milagres são fenômenos naturais mal compreendidos, e a moral do Evangelho é a parte que importa.",
@@ -1459,7 +1476,7 @@ window.JC.eventos = [
     titulo: "A busca do Jesus histórico",
     quando: "séc. XVIII–XXI",
     resumo: "De Reimarus a Schweitzer, e depois dele em novas ondas, gerações de pesquisadores tentam separar o Jesus da história do Cristo da fé — e descobrem que o resultado varia com quem procura.",
-    obra: "pedra_pilatos",
+    obras: ["pedra_pilatos", "schweitzer"],
     refs: ["Albert Schweitzer, História da pesquisa sobre a vida de Jesus (1906)"],
     visoes: {
       historica: "Schweitzer mostrou que cada época pintava um Jesus à sua imagem; a pesquisa atual insiste em situá-lo no judaísmo do século I, com critérios explícitos e menos ilusão de neutralidade.",

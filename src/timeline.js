@@ -249,9 +249,9 @@ window.JC = window.JC || {};
       var linhaAlt = lado === "cima" ? eixoY - topo - CARTAO_H / 2 : topo + CARTAO_H / 2 - eixoY;
 
       var sel = self.selecionado === ev.id ? " sel" : "";
-      var obra = ev.obra && window.JC.obras[ev.obra];
+      var obra = ev.obras && ev.obras.length && window.JC.obras[ev.obras[0]];
       var thumb = (ev.imp <= 2 && obra)
-        ? '<span class="item-thumb" style="background-image:url(&quot;' + JC.urlObra(obra.arquivo, 160) + '&quot;)"></span>' : "";
+        ? '<span class="item-thumb" style="background-image:url(&quot;' + JC.urlObra(obra.arquivo, 320) + '&quot;)"></span>' : "";
       var faixinhas = fontes.slice(0, 6).map(function (f) {
         return '<i style="background:' + self.fontes[f].cor + '"></i>';
       }).join("");
