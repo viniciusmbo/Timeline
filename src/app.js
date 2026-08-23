@@ -366,6 +366,25 @@
     });
   }
 
+  function relatoHtml(ev) {
+    var paras = JC.relatos && JC.relatos[ev.id];
+    if (!paras || !paras.length) return "";
+    return '<p class="p-sub">O que aconteceu</p>' +
+      '<div class="p-relato">' + paras.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("") + "</div>";
+  }
+
+  function refsHtml(ev) {
+    if (!ev.refs || !ev.refs.length) return "";
+    var chips = ev.refs.map(function (r) {
+      var p = JC.passagens[r];
+      if (!p) return '<span class="ref">' + esc(r) + "</span>";
+      return '<button class="ref ref-viva" type="button" data-ref="' + esc(r) + '">' +
+        esc(r) + '<span class="ref-lupa">ler</span></button>';
+    }).join("");
+    return '<p class="p-sub">Onde isso está escrito</p>' +
+      '<p class="p-refs">' + chips + "</p>";
+  }
+
   function abrirPainel(ev, indice) {
     if (!ev) return;
     var lista = obrasDe(ev);
@@ -390,7 +409,8 @@
       '<p class="p-quando">' + esc(ev.quando) + "</p>" +
       (lista.length ? montarCarrossel(lista) : "") +
       '<p class="p-resumo">' + esc(ev.resumo) + "</p>" +
-      (ev.refs ? '<p class="p-refs">' + ev.refs.map(function (r) { return "<span>" + esc(r) + "</span>"; }).join("") + "</p>" : "") +
+      relatoHtml(ev) +
+      refsHtml(ev) +
       '<p class="p-sub">Como cada fonte conta</p>' +
       (visoesSel.join("") || '<p class="p-quando">Nenhuma das fontes selecionadas comenta este fato.</p>') +
       (visoesOut.length
@@ -406,12 +426,61 @@
     if (mais) mais.addEventListener("click", function () { $("p-extra").hidden = false; mais.remove(); });
   }
 
+  $("painel-conteudo").addEventListener("click", function (e) {
+    var b = e.target.closest(".ref-viva");
+    if (b) abrirPassagem(b.dataset.ref);
+  });
+
   function fecharPainel() {
     painel.hidden = true; fundo.hidden = true;
     tl.selecionado = null; tl.render();
   }
   $("painel-fechar").addEventListener("click", fecharPainel);
   fundo.addEventListener("click", fecharPainel);
+
+  /* ————— passagens: texto e leitura ————— */
+  var passagem = $("passagem");
+
+  function abrirPassagem(ref) {
+    var p = JC.passagens[ref];
+    if (!p) return;
+    var biblia = p.tipo === "biblia";
+
+    $("pass-tipo").textContent = biblia ? "Texto bíblico" : "Fonte histórica";
+    $("pass-titulo").textContent = p.titulo;
+    $("pass-texto").innerHTML =
+      (p.nota ? '<p class="pass-nota">' + esc(p.nota) + "</p>" : "") +
+      p.versos.map(function (v) {
+        return '<p class="verso">' + (v.v ? '<b>' + v.v + "</b> " : "") + esc(v.t) + "</p>";
+      }).join("");
+    $("pass-comentario").textContent = p.comentario;
+    $("pass-credito").textContent = biblia ? JC.creditoBiblia : JC.creditoOutras;
+
+    // outras passagens do mesmo fato
+    var ev = atual.ev;
+    var irmas = ev && ev.refs ? ev.refs.filter(function (r) { return r !== ref && JC.passagens[r]; }) : [];
+    $("pass-outras").innerHTML = irmas.length
+      ? '<p class="pass-outras-t">Outras passagens deste fato</p>' + irmas.map(function (r) {
+          return '<button class="ref ref-viva" type="button" data-ref="' + esc(r) + '">' + esc(r) + "</button>";
+        }).join("")
+      : "";
+
+    passagem.hidden = false;
+    document.body.classList.add("travado");
+    passagem.querySelector(".pass-corpo").scrollTop = 0;
+    $("pass-texto").scrollTop = 0;
+  }
+
+  function fecharPassagem() {
+    passagem.hidden = true;
+    if (lupa.hidden) document.body.classList.remove("travado");
+  }
+  $("pass-fechar").addEventListener("click", fecharPassagem);
+  passagem.addEventListener("click", function (e) {
+    if (e.target === passagem) return fecharPassagem();
+    var b = e.target.closest(".ref-viva");
+    if (b) abrirPassagem(b.dataset.ref);
+  });
 
   /* ————— lupa: obra em alta resolucao ————— */
   var lupa = $("lupa"), lupaImg = $("lupa-img"), palco = $("lupa-palco");
@@ -523,6 +592,7 @@
   palco.addEventListener("click", function (e) { if (e.target === palco) fecharLupa(); });
 
   document.addEventListener("keydown", function (e) {
+    if (!passagem.hidden && e.key === "Escape") { fecharPassagem(); return; }
     if (!lupa.hidden) {
       if (e.key === "Escape") fecharLupa();
       else if (e.key === "ArrowRight" && atual.obras.length > 1) abrirLupa((atual.i + 1) % atual.obras.length);
@@ -589,14 +659,20 @@
     abrirPainel(ev, Number(b.dataset.i));
   });
 
+  // atalho publico: abre um fato pelo id (usado pela nota, por links e por testes)
+  JC.abrirFato = function (id, indiceObra) {
+    var ev = JC.eventosPorId[id];
+    if (!ev) return false;
+    irAteEvento(ev, Math.max(tl.span, 1.2));
+    tl.selecionado = ev.id;
+    abrirPainel(ev, indiceObra || 0);
+    return true;
+  };
+
   /* ————— atalho da nota sobre o calendario ————— */
   Array.prototype.forEach.call(document.querySelectorAll("[data-ev]"), function (el) {
     el.addEventListener("click", function () {
-      var ev = JC.eventosPorId[el.dataset.ev];
-      if (!ev) return;
-      irAteEvento(ev, 240);
-      tl.selecionado = ev.id;
-      abrirPainel(ev, 0);
+      JC.abrirFato(el.dataset.ev);
     });
   });
 

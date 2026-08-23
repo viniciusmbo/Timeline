@@ -23,6 +23,15 @@ que ganha detalhe conforme o zoom e compara oito perspectivas diferentes sobre o
 - **Alta resolução.** Clicar na obra abre um visualizador em tela cheia que carrega a imagem grande
   do Commons, com zoom por roda, pinça, duplo clique ou botões, arrastar para deslocar, navegação
   entre as obras do mesmo fato e link para o arquivo original.
+- **Relato completo de cada fato.** Além do resumo curto, cada um dos 108 acontecimentos tem um
+  texto de 200 a 500 palavras (28 mil palavras no total) contando o que aconteceu, o contexto
+  histórico, os problemas do texto e o que a pesquisa discute.
+- **Referências que se abrem.** Cada citação bíblica é um botão: clicando, aparece o texto integral
+  da passagem (tradução de João Ferreira de Almeida, domínio público) e, ao lado, uma leitura
+  explicando o que há ali — contexto, vocabulário original, questões de manuscrito e como cada
+  tradição interpreta. São 132 passagens, incluindo dez fontes não bíblicas em tradução livre:
+  Tácito, o Testimonium Flavianum de Josefo, Plínio, Suetônio, o Talmude, o Alcorão e o Credo de
+  Niceia.
 - **Tabela de divergências.** As mesmas oito perguntas (quem é Jesus, nasceu de virgem, morreu na
   cruz, ressuscitou…) respondidas por cada tradição, acompanhando as fontes selecionadas.
 - **Períodos.** Seis recortes prontos — Tudo, Vida de Jesus, Infância, Ministério, Semana Santa e
@@ -64,6 +73,7 @@ Para publicar, qualquer hospedagem estática serve (GitHub Pages, Netlify, S3): 
 | Abrir um fato | clicar no cartão (ou no `+N` para aproximar o grupo) |
 | Trocar de obra | setas ‹ ›, pontinhos, arrastar de lado, ou `←` `→` com o painel aberto |
 | Ver em alta resolução | clicar na imagem; zoom com roda, pinça, duplo clique ou `+` `−`; `Esc` fecha |
+| Ler a passagem citada | clicar na referência (ex.: `Mc 1,9-11`) dentro do painel do fato |
 | Filtrar fontes | as pastilhas coloridas no topo |
 
 ## Estrutura
@@ -77,6 +87,8 @@ src/data/eventos.js      108 fatos, com data, importância, resumo, referências
 src/data/fontes.js       as oito perspectivas (cor, resumo, textos de referência)
 src/data/obras.js        as obras de arte (autor, ano, acervo, curiosidade, arquivo no Commons, licença)
 src/data/divergencias.js a matriz comparativa
+src/data/relatos.js      o relato longo de cada fato, em parágrafos
+src/data/passagens.js    132 passagens: texto integral, tipo e leitura ao lado
 ```
 
 ### Modelo de um evento
@@ -93,6 +105,10 @@ src/data/divergencias.js a matriz comparativa
 }
 ```
 
+O relato longo vive em `src/data/relatos.js`, indexado pelo mesmo `id`, como uma lista de
+parágrafos. As referências em `refs` que existirem como chave em `src/data/passagens.js` viram
+botões clicáveis no painel; as demais aparecem como etiquetas simples.
+
 `t` é o ano em número decimal (negativo = a.C.); `t2`, quando existe, marca o fim de um período e
 vira uma barra sobre o eixo. `imp` vai de 1 (aparece já no zoom máximo de saída) a 5 (só no detalhe
 mais fino). Um evento só aparece se pelo menos uma das fontes selecionadas comentar o fato.
@@ -107,6 +123,11 @@ tradição é apresentada em seus próprios termos, sem arbitrar quem tem razão
 As imagens vêm do Wikimedia Commons, em domínio público ou sob licença livre (CC BY / CC BY-SA);
 autor e licença aparecem no painel de cada obra e o link leva à página original. Os arquivos foram
 conferidos um a um pela API do Commons — nome, autoria e licença — antes de entrarem no catálogo.
+
+O texto bíblico é a tradução de João Ferreira de Almeida, em domínio público, obtida uma única vez
+pela API pública bible-api.com e gravada no próprio repositório — o app não depende dessa API para
+funcionar. As passagens não bíblicas são trechos em tradução livre, assinalados como tal na
+interface.
 
 As miniaturas são pedidas apenas nas larguras padrão do Wikimedia (320, 640, 800, 1024, 1280 e
 2560 px), que são as que o servidor mantém em cache; pedir tamanhos fora dessa lista faz o Commons

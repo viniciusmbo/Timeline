@@ -122,6 +122,27 @@
   </div>
 </footer>
 
+<div class="passagem" id="passagem" hidden role="dialog" aria-label="Texto da passagem">
+  <div class="pass-caixa">
+    <header class="pass-topo">
+      <div class="pass-id">
+        <p class="pass-tipo" id="pass-tipo"></p>
+        <h3 class="pass-titulo" id="pass-titulo"></h3>
+      </div>
+      <button class="pass-x" id="pass-fechar" type="button" aria-label="Fechar">✕</button>
+    </header>
+    <div class="pass-corpo">
+      <div class="pass-texto" id="pass-texto"></div>
+      <aside class="pass-leitura">
+        <h4>Como ler esta passagem</h4>
+        <p id="pass-comentario"></p>
+        <p class="pass-credito" id="pass-credito"></p>
+        <div class="pass-outras" id="pass-outras"></div>
+      </aside>
+    </div>
+  </div>
+</div>
+
 <div class="lupa" id="lupa" hidden role="dialog" aria-label="Obra em alta resolução">
   <div class="lupa-barra">
     <span class="lupa-titulo" id="lupa-titulo"></span>
@@ -152,6 +173,8 @@
 <script src="src/data/obras.js"></script>
 <script src="src/data/eventos.js"></script>
 <script src="src/data/divergencias.js"></script>
+<script src="src/data/relatos.js"></script>
+<script src="src/data/passagens.js"></script>
 <script src="src/timeline.js"></script>
 <script src="src/app.js"></script>
 </body>
